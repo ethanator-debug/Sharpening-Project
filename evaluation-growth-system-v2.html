@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Evaluation & Growth System (Global-Ready Framework)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --black: #0f0f0f; --bronze: #c9952a; --cream: #f8f4ef; --white: #ffffff; --text: #2c2c2c; --muted: #666; --border: #e0d8cc; }
+  body { font-family: 'Lato', sans-serif; background: #0f0f0f; color: var(--text); }
+
+  header { background: linear-gradient(160deg, #1a1208, #0f0f0f); padding: 64px 40px 56px; text-align: center; position: relative; }
+  header::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--bronze); text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5.5vw, 64px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  header .sub { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .container { max-width: 940px; margin: 0 auto; padding: 56px 32px; }
+
+  .purpose-statement {
+    background: #1c1710;
+    border: 1px solid rgba(201,149,42,0.2);
+    padding: 36px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .purpose-statement h2 { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 4px; color: var(--bronze); margin-bottom: 16px; }
+  .purpose-statement p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; max-width: 600px; margin: 0 auto 12px; }
+  .purpose-statement ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 20px; text-align: left; }
+  .purpose-statement li { font-size: 13px; color: rgba(255,255,255,0.6); padding: 6px 0 6px 20px; position: relative; }
+  .purpose-statement li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+
+  .section { margin-bottom: 48px; }
+  .section-label { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 4px; color: var(--bronze); opacity: 0.6; margin-bottom: 4px; }
+  .section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--white); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(201,149,42,0.25); }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .kpi-card { background: #1c1710; padding: 20px; border-top: 3px solid var(--bronze); border: 1px solid rgba(201,149,42,0.1); border-top: 3px solid var(--bronze); }
+  .kpi-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+  .kpi-card ul { list-style: none; padding: 0; }
+  .kpi-card li { font-size: 12px; line-height: 1.5; padding: 4px 0 4px 14px; position: relative; color: rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .kpi-card li:last-child { border-bottom: none; }
+  .kpi-card li::before { content: '•'; position: absolute; left: 0; color: var(--bronze); }
+
+  .cadence-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  @media (max-width: 560px) { .cadence-timeline { grid-template-columns: 1fr 1fr; } }
+  .cadence-cell { background: #1c1710; padding: 20px 16px; }
+  .cad-freq { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 12px; border-bottom: 1px solid rgba(201,149,42,0.2); padding-bottom: 8px; }
+  .cadence-cell ul { list-style: none; padding: 0; }
+  .cadence-cell li { font-size: 12px; line-height: 1.5; padding: 3px 0 3px 12px; position: relative; color: rgba(255,255,255,0.55); }
+  .cadence-cell li::before { content: '—'; position: absolute; left: 0; color: rgba(201,149,42,0.4); font-size: 10px; }
+
+  .survey-stack { display: flex; flex-direction: column; gap: 16px; }
+  .survey-card { background: #1c1710; overflow: hidden; border: 1px solid rgba(201,149,42,0.1); }
+  .survey-head { background: #100e08; padding: 12px 20px; display: flex; align-items: center; gap: 12px; }
+  .survey-badge { background: var(--bronze); color: var(--black); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; white-space: nowrap; }
+  .survey-head h3 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; color: var(--white); }
+  .survey-body { padding: 18px 20px; }
+  .scale-note { font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 12px; font-style: italic; }
+  .q-list { list-style: none; padding: 0; }
+  .q-list li { font-size: 13px; line-height: 1.5; padding: 7px 0 7px 28px; position: relative; color: rgba(255,255,255,0.7); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .q-list li:last-child { border-bottom: none; }
+  .q-list li::before { content: attr(data-num); position: absolute; left: 0; font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--bronze); line-height: 1.2; }
+  .open-q { font-size: 12px; color: rgba(255,255,255,0.3); font-style: italic; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.03); }
+
+  .snapshot-card { background: #1c1710; padding: 24px; border: 1px solid rgba(201,149,42,0.1); }
+  .snap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+  .snap-item { background: rgba(255,255,255,0.03); padding: 12px; }
+  .snap-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
+  .snap-item p { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+  .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .escalation-grid { grid-template-columns: 1fr; } }
+  .esc-card { padding: 20px; border: 1px solid rgba(201,149,42,0.1); }
+  .esc-card.mandatory { background: rgba(200,50,50,0.07); border-color: rgba(200,80,80,0.2); }
+  .esc-card.important { background: #1c1710; }
+  .esc-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .esc-card.mandatory .esc-label { color: #cc6666; }
+  .esc-card.important .esc-label { color: var(--bronze); }
+  .esc-card ul { list-style: none; padding: 0; }
+  .esc-card li { font-size: 12px; line-height: 1.5; padding: 4px 0 4px 14px; position: relative; color: rgba(255,255,255,0.6); }
+  .esc-card.mandatory li::before { content: '!'; position: absolute; left: 0; color: #cc6666; font-weight: 700; }
+  .esc-card.important li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+
+  .ownership-table { background: #1c1710; width: 100%; border-collapse: collapse; border: 1px solid rgba(201,149,42,0.1); }
+  .ownership-table th { background: #100e08; color: var(--bronze); font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 2px; padding: 12px 16px; text-align: left; }
+  .ownership-table td { font-size: 13px; padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.65); }
+  .ownership-table tr:last-child td { border-bottom: none; }
+
+  .goals-final { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 560px) { .goals-final { grid-template-columns: 1fr; } }
+  .goal-final { background: #1c1710; padding: 28px 20px; text-align: center; border-top: 4px solid var(--bronze); }
+  .goal-final-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--bronze); opacity: 0.2; line-height: 1; }
+  .goal-final h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; color: var(--white); margin-bottom: 10px; }
+  .goal-final p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  footer { background: #0a0a0a; color: rgba(255,255,255,0.25); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Sharpening Project</div>
+  <h1>Evaluation &<br>Growth System</h1>
+  <p class="sub">A global-ready framework for excellence, safety, and long-term impact</p>
+</header>
+
+<div class="container">
+
+  <div class="purpose-statement">
+    <h2>Purpose: Build What You Want to Grow</h2>
+    <p>Evaluation is not about micromanaging performance — it's about protecting fruitfulness, ensuring safety, and building a program that can scale without losing its soul.</p>
+    <p>This system measures what matters most:</p>
+    <ul>
+      <li>Spiritual health</li>
+      <li>Relational health</li>
+      <li>Mentor development</li>
+      <li>Student growth</li>
+      <li>Safety and compliance</li>
+      <li>Operational consistency</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 1</div>
+    <h2>Guiding Objectives</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Christ at Center</div><ul><li>Evaluate fruit, not hype</li></ul></div>
+      <div class="kpi-card"><div class="kpi-label">Program-Wide Safety</div><ul><li>No chapter or mentor operates outside protocol</li></ul></div>
+      <div class="kpi-card"><div class="kpi-label">Strengthen Leaders</div><ul><li>Mentors become disciple-makers, not just babysitters</li></ul></div>
+      <div class="kpi-card"><div class="kpi-label">Identify Trends Early</div><ul><li>Fix issues before they become patterns</li></ul></div>
+      <div class="kpi-card"><div class="kpi-label">Universal Excellence</div><ul><li>Every chapter, mentor, student — same standard</li></ul></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 2</div>
+    <h2>Core Metrics (KPIs)</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">A. Presence & Consistency</div>
+        <ul><li>% of weekly 1-on-1 meetings completed</li><li>Mentor & student consistency ratings</li><li>Monthly hangout attendance</li></ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">B. Discipleship Momentum</div>
+        <ul><li>Weekly prayer moments logged</li><li>Scripture reflection completed</li><li>"Next step" actions for students & mentors</li></ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">C. Relational Health</div>
+        <ul><li>Trust level score (student → mentor)</li><li>Comfort score (heard, safe, valued)</li><li>Connection quality (high/medium/low)</li></ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">D. Mentor Leadership Maturity</div>
+        <ul><li>Integrity score (self + coordinator review)</li><li>Humility / Listening score</li><li>Protocol compliance score</li></ul>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">E. Safety & Compliance</div>
+        <ul><li>Number of escalations</li><li>Escalation timeliness</li><li>Incident report completeness</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 3</div>
+    <h2>Rhythm & Cadence</h2>
+    <div class="cadence-timeline">
+      <div class="cadence-cell">
+        <div class="cad-freq">Weekly</div>
+        <ul><li>1-on-1 mentor check-in (15–20 min)</li><li>Attendance & meeting log submitted</li></ul>
+      </div>
+      <div class="cadence-cell">
+        <div class="cad-freq">Monthly</div>
+        <ul><li>Group hangout</li><li>Monthly health snapshot</li><li>Leadership pulse check</li></ul>
+      </div>
+      <div class="cadence-cell">
+        <div class="cad-freq">Quarterly</div>
+        <ul><li>Leadership Review (60 min)</li><li>KPI dashboard review</li><li>Identify wins, patterns, red flags</li><li>Adjust training and supports</li></ul>
+      </div>
+      <div class="cadence-cell">
+        <div class="cad-freq">Annually</div>
+        <ul><li>Annual Evaluation</li><li>Celebration & commissioning</li><li>Year-end strategic meeting</li><li>SOP + training refinement</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 4</div>
+    <h2>Survey Templates</h2>
+    <div class="survey-stack">
+      <div class="survey-card">
+        <div class="survey-head"><span class="survey-badge">5 min</span><h3>Student Pulse Survey</h3></div>
+        <div class="survey-body">
+          <p class="scale-note">Scale: 1–5 + one open question</p>
+          <ol class="q-list">
+            <li data-num="1">I feel safe, valued, and understood in my mentorship.</li>
+            <li data-num="2">I trust my mentor.</li>
+            <li data-num="3">I am growing spiritually and learning about God.</li>
+            <li data-num="4">My mentor helps me handle challenges in a healthy way.</li>
+            <li data-num="5">I look forward to our meetings.</li>
+            <li data-num="6">I feel more confident in who I am.</li>
+          </ol>
+          <div class="open-q">Open: "What's one thing we could improve for you?"</div>
+        </div>
+      </div>
+      <div class="survey-card">
+        <div class="survey-head"><span class="survey-badge">5 min</span><h3>Parent Feedback Survey</h3></div>
+        <div class="survey-body">
+          <p class="scale-note">Scale: 1–5</p>
+          <ol class="q-list">
+            <li data-num="1">My son feels safe in this program.</li>
+            <li data-num="2">I've seen growth in his character or faith.</li>
+            <li data-num="3">Communication is clear and timely.</li>
+            <li data-num="4">The mentors are mature, consistent, and responsible.</li>
+            <li data-num="5">I trust The Sharpening Project with my child.</li>
+          </ol>
+          <div class="open-q">Open: "What's one thing we should keep doing? What should change?"</div>
+        </div>
+      </div>
+      <div class="survey-card">
+        <div class="survey-head"><span class="survey-badge">5 min</span><h3>Mentor Self-Assessment</h3></div>
+        <div class="survey-body">
+          <p class="scale-note">Scale: 1–5</p>
+          <ol class="q-list">
+            <li data-num="1">I stay consistent, prepared, and engaged.</li>
+            <li data-num="2">I'm growing spiritually and staying accountable.</li>
+            <li data-num="3">I lead with humility and listen well.</li>
+            <li data-num="4">I follow all safety protocols with integrity.</li>
+            <li data-num="5">My student(s) are opening up and growing.</li>
+          </ol>
+          <div class="open-q">Open: "Where do you need more training or support?"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 5</div>
+    <h2>Monthly Group Health Snapshot (5 Minutes)</h2>
+    <div class="snapshot-card">
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);">Mentor submits each month — the equivalent of a "heartbeat check"</p>
+      <div class="snap-grid">
+        <div class="snap-item"><div class="snap-label">Attendance</div><p>Met / did not meet</p></div>
+        <div class="snap-item"><div class="snap-label">Devotional</div><p>Yes / No + topic</p></div>
+        <div class="snap-item"><div class="snap-label">Trust Level</div><p>Low / Medium / High</p></div>
+        <div class="snap-item"><div class="snap-label">Wins</div><p>1–2 sentences</p></div>
+        <div class="snap-item"><div class="snap-label">Needs / Alerts</div><p>Care request, escalation, resource need</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 6</div>
+    <h2>Escalation & Safety Checks</h2>
+    <div class="escalation-grid">
+      <div class="esc-card mandatory">
+        <div class="esc-label">Mandatory Reporting (Legal)</div>
+        <ul>
+          <li>Abuse / neglect</li>
+          <li>Self-harm or suicidal talk</li>
+          <li>Threats of violence</li>
+          <li>Sexual misconduct</li>
+        </ul>
+        <p style="font-size:11px;color:rgba(255,100,100,0.5);margin-top:12px;line-height:1.5;">Immediate escalation: Ensure safety → Call civil authorities → Notify parents → Notify Program Director & Head Advisor → Complete incident report same day</p>
+      </div>
+      <div class="esc-card important">
+        <div class="esc-label">Leadership-Important (Non-Emergency)</div>
+        <ul>
+          <li>Pornography struggles</li>
+          <li>Anxiety / depression</li>
+          <li>Substance use</li>
+          <li>Family crisis</li>
+          <li>Identity confusion</li>
+          <li>Significant emotional changes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 9</div>
+    <h2>Success Definitions</h2>
+    <div class="goals-final">
+      <div class="goal-final"><div class="goal-final-num">1</div><h3>Walk in Purpose</h3><p>Students grow in identity, confidence, Scripture, and calling.</p></div>
+      <div class="goal-final"><div class="goal-final-num">2</div><h3>Lead with Strength</h3><p>Mentors model faith, humility, responsibility, and consistency. Older students become future leaders.</p></div>
+      <div class="goal-final"><div class="goal-final-num">3</div><h3>Find Lasting Freedom</h3><p>Students develop healthy habits, spiritual disciplines, and resilience — walking in truth, not secrecy.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 10</div>
+    <h2>Ownership</h2>
+    <table class="ownership-table">
+      <thead><tr><th>Role</th><th>Owns</th></tr></thead>
+      <tbody>
+        <tr><td>Program Director</td><td>Dashboard + review rhythm</td></tr>
+        <tr><td>Mentor Coordinator</td><td>Weekly check-ins + monthly snapshots</td></tr>
+        <tr><td>Parent & Media Liaison</td><td>Parent feedback surveys</td></tr>
+        <tr><td>Head Advisor</td><td>Spiritual health + escalation coaching</td></tr>
+        <tr><td>All Mentors</td><td>Consistency, safety, and leadership</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Evaluation & Growth System — Global-Ready Framework
+</footer>
+
+</body>
+</html>

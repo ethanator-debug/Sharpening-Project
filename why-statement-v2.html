@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Why Statement & Three Core Goals (Movement Edition)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --black: #0f0f0f; --bronze: #c9952a; --white: #fff; --text: #2c2c2c; }
+  body { font-family: 'Lato', sans-serif; background: var(--black); color: var(--white); }
+
+  .opening {
+    background: linear-gradient(180deg, #1a1208 0%, #0f0f0f 100%);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .opening::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); }
+  .org { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 6px; color: var(--bronze); margin-bottom: 16px; }
+  .main-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 8vw, 90px); letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  .sub-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 4vw, 36px); letter-spacing: 3px; color: var(--bronze); }
+
+  .conviction {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 72px 40px;
+    text-align: center;
+  }
+  .conviction .label { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 5px; color: var(--bronze); opacity: 0.7; margin-bottom: 20px; }
+  .conviction .core-statement {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4.5vw, 42px);
+    letter-spacing: 1px;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+  .conviction .core-statement span { color: var(--bronze); }
+  .conviction p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.9; margin-bottom: 16px; }
+
+  .bullet-why { list-style: none; padding: 0; max-width: 600px; margin: 24px auto 0; text-align: left; }
+  .bullet-why li { font-size: 15px; line-height: 1.7; padding: 10px 0 10px 28px; position: relative; color: rgba(255,255,255,0.75); border-bottom: 1px solid rgba(201,149,42,0.1); }
+  .bullet-why li:last-child { border-bottom: none; }
+  .bullet-why li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+
+  .movement-call {
+    background: var(--bronze);
+    color: var(--black);
+    padding: 28px 40px;
+    text-align: center;
+  }
+  .movement-call .big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 4vw, 36px); letter-spacing: 3px; line-height: 1.3; }
+
+  .goals { background: #0a0808; padding: 72px 40px; }
+  .goals-intro { text-align: center; max-width: 700px; margin: 0 auto 56px; }
+  .goals-intro .label { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--bronze); margin-bottom: 12px; }
+  .goals-intro h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px); letter-spacing: 2px; color: var(--white); margin-bottom: 16px; }
+  .goals-intro p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+  .goals-intro .rule { font-style: italic; font-weight: 700; color: var(--bronze); font-size: 15px; margin-top: 12px; }
+
+  .goal-big { max-width: 820px; margin: 0 auto; padding: 48px 0; border-bottom: 1px solid rgba(201,149,42,0.1); }
+  .goal-big:last-child { border-bottom: none; padding-bottom: 0; }
+  .goal-big-num { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 4px; color: var(--bronze); opacity: 0.5; margin-bottom: 8px; }
+  .goal-big-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px); letter-spacing: 2px; color: var(--bronze); line-height: 1; margin-bottom: 20px; }
+  .goal-big p { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+  .goal-big p + p { margin-top: 12px; }
+  .goal-big .motto { font-weight: 700; color: var(--white); font-size: 17px; }
+
+  .flows-section {
+    padding: 72px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, #0a0808 0%, #1a1208 100%);
+  }
+  .flows-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 52px); letter-spacing: 2px; color: var(--white); margin-bottom: 32px; }
+  .flow-items { display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 36px; }
+  .flow-item { font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px, 3vw, 26px); letter-spacing: 3px; color: rgba(255,255,255,0.4); }
+  .flow-item.highlight { color: var(--bronze); }
+  .anchor { font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 3.5vw, 28px); letter-spacing: 3px; color: var(--white); margin-top: 16px; }
+
+  footer { background: #0a0a0a; text-align: center; padding: 32px; border-top: 2px solid rgba(201,149,42,0.15); }
+  footer p { font-style: italic; font-size: 15px; color: rgba(255,255,255,0.4); line-height: 1.7; margin-bottom: 10px; }
+  footer .ref { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<div class="opening">
+  <div class="org">The Sharpening Project</div>
+  <div class="main-h">Why Statement<br>& Three Core Goals</div>
+  <div class="sub-h">A Generation-Wide Discipleship Movement</div>
+</div>
+
+<div class="conviction">
+  <div class="label">Why We Exist</div>
+  <div class="core-statement">A generation of young men is growing up<br><span>disconnected</span> — from purpose, from truth,<br>and from the One who made them.<br>The Sharpening Project exists to <span>change that.</span></div>
+  <p>Our movement was created with one conviction:</p>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,4vw,36px);letter-spacing:2px;color:var(--white);line-height:1.3;">When a young man knows who he is in Christ,<br>he becomes unshakable.</p>
+  <p style="margin-top:24px;">We exist to build a Jesus-centered brotherhood where young men can be honest without fear, seen without judgment, and led toward the kind of transformation that lasts a lifetime. Every mentorship relationship, every hangout, and every conversation exists so young men can:</p>
+  <ul class="bullet-why">
+    <li>Experience the love of God through trusted mentors</li>
+    <li>Grow into leaders who bring light into dark places</li>
+    <li>Step into freedom from temptation, shame, and spiritual confusion</li>
+    <li>Walk boldly in the purpose God designed them for</li>
+  </ul>
+</div>
+
+<div class="movement-call">
+  <div class="big">This is not just a program —<br>This is a generation-wide discipleship movement.<br>A brotherhood sharpening brotherhood.</div>
+</div>
+
+<div class="goals">
+  <div class="goals-intro">
+    <div class="label">Our Mission</div>
+    <h2>Three Core Goals</h2>
+    <p>These three goals define everything the Sharpening Project does.</p>
+    <p class="rule">If an event, action, or decision doesn't support these three goals — we don't do it.</p>
+  </div>
+
+  <div class="goal-big">
+    <div class="goal-big-num">Goal 01</div>
+    <div class="goal-big-title">Loved & Safe</div>
+    <p>To make sure every student feels deeply loved, protected, and supported — <span style="font-weight:700;color:var(--white);">never walking through life alone.</span></p>
+    <p>A young man grows fastest in a place where he feels safe enough to be honest. We exist to create that place.</p>
+  </div>
+
+  <div class="goal-big">
+    <div class="goal-big-num">Goal 02</div>
+    <div class="goal-big-title">Lead with Strength</div>
+    <p>To raise up young men who model: <span style="font-weight:700;color:var(--white);">faith, humility, courage, integrity, and Christ-centered leadership.</span></p>
+    <p>Mentors don't just guide students — they become the kind of men students one day want to become.</p>
+    <p class="motto">We win when students become mentors themselves.</p>
+  </div>
+
+  <div class="goal-big">
+    <div class="goal-big-num">Goal 03</div>
+    <div class="goal-big-title">Lasting Freedom</div>
+    <p>To guide young men toward <span style="font-weight:700;color:var(--white);">real, long-term freedom</span> — freedom rooted in truth, Scripture, accountability, and the Holy Spirit.</p>
+    <p>Freedom from temptation. Freedom from isolation. Freedom from the lies that keep young men stuck.</p>
+    <p class="motto">Our goal is discipleship that changes futures — not just behavior.</p>
+  </div>
+</div>
+
+<div class="flows-section">
+  <div class="flows-h">Everything Flows From This</div>
+  <div class="flow-items">
+    <div class="flow-item">Every Event</div>
+    <div class="flow-item">Every Mentor</div>
+    <div class="flow-item">Every Meeting</div>
+    <div class="flow-item highlight">Every Decision</div>
+  </div>
+  <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:16px;">—must advance <strong style="color:var(--white);">love, leadership, or freedom.</strong></p>
+  <p style="font-size:15px;color:rgba(255,255,255,0.3);">If not, it doesn't belong in this movement.</p>
+  <div class="anchor" style="margin-top:32px;">Jesus stays at the center. Always.</div>
+</div>
+
+<footer>
+  <p>"As iron sharpens iron, so one man sharpens another."</p>
+  <div class="ref">Proverbs 27:17</div>
+</footer>
+
+</body>
+</html>

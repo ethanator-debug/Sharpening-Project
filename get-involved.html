@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved — The Sharpening Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --black: #0f0f0f; --bronze: #c9952a; --cream: #f8f4ef; --white: #fff; --text: #2c2c2c; --muted: #666; --border: #ddd; --err: #c0392b; }
+body { font-family: 'Lato', sans-serif; background: var(--black); color: var(--white); min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+
+/* Back link */
+.back { padding: 18px 40px; background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.back a { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.35); }
+.back a:hover { color: var(--bronze); }
+
+/* Hero */
+.hero { background: linear-gradient(160deg, #1a1208, #0f0f0f); padding: 56px 40px 48px; text-align: center; border-bottom: 1px solid rgba(201,149,42,0.12); }
+.org { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--bronze); margin-bottom: 14px; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 68px); letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 14px; }
+.hero p { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+
+/* Form wrapper */
+.form-outer { max-width: 720px; margin: 0 auto; padding: 48px 40px 80px; }
+
+/* Form sections */
+.form-section { margin-bottom: 40px; }
+.form-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 6px; }
+.form-section-desc { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; line-height: 1.6; }
+.divider { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 32px; }
+
+/* Role select */
+.role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 8px; }
+.role-check { display: none; }
+.role-label { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.role-label:hover { border-color: rgba(201,149,42,0.3); }
+.role-check:checked + .role-label { border-color: var(--bronze); background: rgba(201,149,42,0.08); }
+.role-check:checked + .role-label .role-icon { color: var(--bronze); }
+.role-icon { font-size: 18px; flex-shrink: 0; color: rgba(255,255,255,0.25); transition: color 0.15s; }
+.role-text { font-size: 13px; font-weight: 700; color: var(--white); }
+.role-text small { display: block; font-weight: 400; font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+/* Fields */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 540px) { .field-grid, .field-grid.three { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+label .optional { font-weight: 400; color: rgba(255,255,255,0.2); font-size: 10px; text-transform: none; letter-spacing: 0; }
+input, select, textarea {
+  background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); color: var(--white);
+  padding: 12px 14px; font-size: 14px; font-family: 'Lato', sans-serif;
+  transition: border-color 0.15s;
+}
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(201,149,42,0.5); }
+select option { background: #222; }
+textarea { min-height: 90px; resize: vertical; }
+.field-note { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+/* Conditional sections */
+.conditional { display: none; }
+.conditional.visible { display: block; }
+.cond-header { background: rgba(201,149,42,0.07); border-left: 3px solid var(--bronze); padding: 12px 16px; margin-bottom: 20px; }
+.cond-header h4 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 2px; }
+.cond-header p { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+/* Checkbox field */
+.check-field { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; }
+.check-field input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--bronze); }
+.check-field span { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+/* Submit button */
+.submit-wrap { margin-top: 40px; }
+.submit-btn { width: 100%; background: var(--bronze); color: var(--black); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; padding: 20px; border: none; cursor: pointer; transition: opacity 0.2s; }
+.submit-btn:hover { opacity: 0.85; }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.form-note { text-align: center; font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 14px; line-height: 1.6; }
+
+/* Success state */
+.success-msg { display: none; text-align: center; padding: 48px 40px; }
+.success-msg .icon { font-size: 48px; color: var(--bronze); margin-bottom: 20px; }
+.success-msg h2 { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 3px; color: var(--white); margin-bottom: 14px; }
+.success-msg p { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.8; max-width: 480px; margin: 0 auto 28px; }
+.success-msg a { display: inline-block; background: var(--bronze); color: var(--black); font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 3px; padding: 14px 32px; }
+
+/* Error */
+.error-msg { background: rgba(192,57,43,0.12); border: 1px solid rgba(192,57,43,0.3); color: #e74c3c; padding: 12px 16px; font-size: 13px; margin-bottom: 20px; display: none; }
+
+footer { background: #0a0a0a; text-align: center; padding: 24px; border-top: 1px solid rgba(255,255,255,0.05); }
+footer p { font-size: 11px; color: rgba(255,255,255,0.15); letter-spacing: 1.5px; text-transform: uppercase; }
+footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<div class="back"><a href="index.html">← Back to All Resources</a></div>
+
+<div class="hero">
+  <div class="org">The Sharpening Project</div>
+  <h1>Get Involved</h1>
+  <p>Fill out the form below and we'll be in touch. Whether you're a parent, a mentor, or someone who wants to invest — we'd love to hear from you.</p>
+</div>
+
+<div class="form-outer">
+  <div class="error-msg" id="errorMsg"></div>
+
+  <form id="involvedForm" novalidate>
+
+    <!-- Step 1: Role -->
+    <div class="form-section">
+      <div class="form-section-title">Who Are You?</div>
+      <div class="form-section-desc">Select all that apply — you can pick more than one.</div>
+      <div class="role-grid">
+        <div>
+          <input type="checkbox" name="roles" id="role_parent" value="parent_guardian" class="role-check" onchange="updateConditionals()">
+          <label for="role_parent" class="role-label">
+            <span class="role-icon">👨‍👦</span>
+            <div class="role-text">Parent / Guardian <small>My son may be interested</small></div>
+          </label>
+        </div>
+        <div>
+          <input type="checkbox" name="roles" id="role_potential_student" value="potential_student" class="role-check" onchange="updateConditionals()">
+          <label for="role_potential_student" class="role-label">
+            <span class="role-icon">🎓</span>
+            <div class="role-text">Potential Student <small>I'm interested in joining</small></div>
+          </label>
+        </div>
+        <div>
+          <input type="checkbox" name="roles" id="role_current_student" value="current_student" class="role-check" onchange="updateConditionals()">
+          <label for="role_current_student" class="role-label">
+            <span class="role-icon">⭐</span>
+            <div class="role-text">Current Student <small>I'm already in the program</small></div>
+          </label>
+        </div>
+        <div>
+          <input type="checkbox" name="roles" id="role_potential_mentor" value="potential_mentor" class="role-check" onchange="updateConditionals()">
+          <label for="role_potential_mentor" class="role-label">
+            <span class="role-icon">🤝</span>
+            <div class="role-text">Potential Mentor <small>I want to mentor a young man</small></div>
+          </label>
+        </div>
+        <div>
+          <input type="checkbox" name="roles" id="role_current_mentor" value="current_mentor" class="role-check" onchange="updateConditionals()">
+          <label for="role_current_mentor" class="role-label">
+            <span class="role-icon">🏆</span>
+            <div class="role-text">Current Mentor <small>I'm already serving as a mentor</small></div>
+          </label>
+        </div>
+        <div>
+          <input type="checkbox" name="roles" id="role_donor" value="donor_investor" class="role-check" onchange="updateConditionals()">
+          <label for="role_donor" class="role-label">
+            <span class="role-icon">💛</span>
+            <div class="role-text">Donor / Investor <small>I want to support the mission</small></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Core Info -->
+    <div class="form-section">
+      <div class="form-section-title">Your Information</div>
+      <div class="form-section-desc">Basic contact details. All fields are required unless marked optional.</div>
+      <div class="field-grid" style="margin-bottom:14px;">
+        <div class="field">
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name" placeholder="John" required autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" placeholder="Smith" required autocomplete="family-name">
+        </div>
+        <div class="field full">
+          <label for="preferred_name">Preferred Name <span class="optional">(optional)</span></label>
+          <input type="text" id="preferred_name" name="preferred_name" placeholder="What do people usually call you?" autocomplete="nickname">
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="phone">Mobile Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(615) 555-1234" autocomplete="tel">
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="address">Home Address <span class="optional">(optional)</span></label>
+        <input type="text" id="address" name="address" placeholder="123 Main Street" autocomplete="street-address">
+      </div>
+      <div class="field-grid three">
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="Franklin" autocomplete="address-level2">
+        </div>
+        <div class="field">
+          <label for="state">State</label>
+          <select id="state" name="state" autocomplete="address-level1">
+            <option value="">— State —</option>
+            <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+            <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>
+            <option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+            <option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+            <option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option>
+            <option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option>
+            <option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+            <option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+            <option>SD</option><option selected>TN</option><option>TX</option><option>UT</option><option>VT</option>
+            <option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="zip">ZIP Code</label>
+          <input type="text" id="zip" name="zip" placeholder="37064" maxlength="10" autocomplete="postal-code">
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px;">
+        <label for="date_of_birth">Date of Birth <span class="optional">(optional)</span></label>
+        <input type="date" id="date_of_birth" name="date_of_birth" autocomplete="bday">
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CONDITIONAL: Parent section -->
+    <div class="conditional" id="cond_parent">
+      <div class="form-section">
+        <div class="cond-header">
+          <h4>Parent / Guardian Details</h4>
+          <p>Tell us about the young man you're inquiring about.</p>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="student_name">Student's Full Name</label>
+            <input type="text" id="student_name" name="student_name" placeholder="Tommy Smith">
+          </div>
+          <div class="field">
+            <label for="student_grade">Grade Level</label>
+            <select id="student_grade" name="student_grade">
+              <option value="">— Select Grade —</option>
+              <option>6th Grade</option><option>7th Grade</option><option>8th Grade</option>
+              <option>9th Grade (Freshman)</option><option>10th Grade (Sophomore)</option>
+              <option>11th Grade (Junior)</option><option>12th Grade (Senior)</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="student_school">School Name <span class="optional">(optional)</span></label>
+            <input type="text" id="student_school" name="student_school" placeholder="Williamson County High School">
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- CONDITIONAL: Student section -->
+    <div class="conditional" id="cond_student">
+      <div class="form-section">
+        <div class="cond-header">
+          <h4>Student Details</h4>
+          <p>We'll reach out to you and your parent or guardian.</p>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="parent_contact_name">Parent / Guardian Name</label>
+            <input type="text" id="parent_contact_name" name="parent_contact_name" placeholder="John Smith Sr.">
+          </div>
+          <div class="field">
+            <label for="parent_contact_phone">Parent / Guardian Phone</label>
+            <input type="tel" id="parent_contact_phone" name="parent_contact_phone" placeholder="(615) 555-0001">
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- CONDITIONAL: Mentor section -->
+    <div class="conditional" id="cond_mentor">
+      <div class="form-section">
+        <div class="cond-header">
+          <h4>Mentor Details</h4>
+          <p>Help us get to know you better as a potential mentor.</p>
+        </div>
+        <div class="field-grid" style="margin-bottom:14px;">
+          <div class="field">
+            <label for="occupation">Occupation</label>
+            <input type="text" id="occupation" name="occupation" placeholder="Teacher, Engineer, Pastor...">
+          </div>
+          <div class="field">
+            <label for="church">Church Affiliation <span class="optional">(optional)</span></label>
+            <input type="text" id="church" name="church" placeholder="Life Church, Grace Community...">
+          </div>
+          <div class="field full">
+            <label for="availability">General Availability</label>
+            <input type="text" id="availability" name="availability" placeholder="Weekday evenings, Saturday mornings...">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:14px;">
+          <label for="mentor_experience">Previous Mentorship Experience <span class="optional">(optional)</span></label>
+          <textarea id="mentor_experience" name="mentor_experience" placeholder="Briefly describe any past mentorship, youth ministry, coaching, or similar experience..."></textarea>
+        </div>
+        <label class="check-field">
+          <input type="checkbox" id="background_check_consent" name="background_check_consent" value="1">
+          <span>I understand and consent to a background check as part of the mentor vetting process.</span>
+        </label>
+      </div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- CONDITIONAL: Donor section -->
+    <div class="conditional" id="cond_donor">
+      <div class="form-section">
+        <div class="cond-header">
+          <h4>Donor / Investor Details</h4>
+          <p>We're grateful for your interest in investing in this movement.</p>
+        </div>
+        <div class="field-grid" style="margin-bottom:14px;">
+          <div class="field full">
+            <label for="organization">Organization / Church Name <span class="optional">(optional)</span></label>
+            <input type="text" id="organization" name="organization" placeholder="Company, church, or foundation name">
+          </div>
+          <div class="field full">
+            <label for="giving_interest">How Would You Like to Give?</label>
+            <select id="giving_interest" name="giving_interest">
+              <option value="">— Select —</option>
+              <option>One-time financial gift</option>
+              <option>Monthly recurring support</option>
+              <option>In-kind donation (supplies, space, services)</option>
+              <option>Sponsoring a specific event</option>
+              <option>Grant or organizational funding</option>
+              <option>Open to discussing options</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- General -->
+    <div class="form-section">
+      <div class="form-section-title">Anything Else?</div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="how_heard">How Did You Hear About Us? <span class="optional">(optional)</span></label>
+        <select id="how_heard" name="how_heard">
+          <option value="">— Select —</option>
+          <option>Friend or Family</option>
+          <option>Church</option>
+          <option>Instagram</option>
+          <option>Facebook</option>
+          <option>Flyer</option>
+          <option>Google / Search</option>
+          <option>Event</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Message / Questions <span class="optional">(optional)</span></label>
+        <textarea id="message" name="message" placeholder="Anything you'd like us to know before we reach out..."></textarea>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn" id="submitBtn">Submit →</button>
+      <p class="form-note">
+        Your information is kept private and used only for communication with The Sharpening Project.<br>
+        We will never sell or share your data.
+      </p>
+    </div>
+
+  </form>
+
+  <!-- Success -->
+  <div class="success-msg" id="successMsg">
+    <div class="icon">✦</div>
+    <h2>You're In.</h2>
+    <p>Thank you for reaching out. Someone from The Sharpening Project will be in touch with you soon. We're glad you're here.</p>
+    <a href="index.html">← Back to Home</a>
+  </div>
+</div>
+
+<footer>
+  <p><span>The Sharpening Project</span> &nbsp;·&nbsp; Proverbs 27:17</p>
+</footer>
+
+<script>
+function updateConditionals() {
+  const checked = [...document.querySelectorAll('input[name="roles"]:checked')].map(el => el.value);
+
+  const showParent  = checked.includes('parent_guardian');
+  const showStudent = checked.includes('potential_student') || checked.includes('current_student');
+  const showMentor  = checked.includes('potential_mentor')  || checked.includes('current_mentor');
+  const showDonor   = checked.includes('donor_investor');
+
+  toggle('cond_parent',  showParent);
+  toggle('cond_student', showStudent);
+  toggle('cond_mentor',  showMentor);
+  toggle('cond_donor',   showDonor);
+}
+
+function toggle(id, show) {
+  const el = document.getElementById(id);
+  if (show) el.classList.add('visible');
+  else      el.classList.remove('visible');
+}
+
+document.getElementById('involvedForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const errEl = document.getElementById('errorMsg');
+  const btn   = document.getElementById('submitBtn');
+  errEl.style.display = 'none';
+
+  // Validate roles
+  const roles = [...document.querySelectorAll('input[name="roles"]:checked')].map(el => el.value);
+  if (!roles.length) {
+    errEl.textContent = 'Please select at least one role above.';
+    errEl.style.display = 'block';
+    errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  // Validate required fields
+  const first = document.getElementById('first_name').value.trim();
+  const last  = document.getElementById('last_name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!first || !last || !email) {
+    errEl.textContent = 'Please fill in your first name, last name, and email address.';
+    errEl.style.display = 'block';
+    errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  // Collect all form data
+  const data = {};
+  new FormData(this).forEach((val, key) => {
+    if (key === 'roles') {
+      if (!data.roles) data.roles = [];
+      data.roles.push(val);
+    } else {
+      data[key] = val;
+    }
+  });
+  if (!data.roles) data.roles = [];
+
+  try {
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const json = await res.json();
+
+    if (json.success) {
+      document.getElementById('involvedForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error(json.error || 'Unknown error');
+    }
+  } catch (err) {
+    errEl.textContent = err.message || 'Something went wrong. Please try again.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Submit →';
+  }
+});
+</script>
+</body>
+</html>

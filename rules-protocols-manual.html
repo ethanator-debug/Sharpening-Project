@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Rules & Protocols Manual</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --muted: #666;
+    --border: #e0d8cc;
+    --light-bg: #fafaf8;
+  }
+  body { font-family: 'Lato', sans-serif; background: #f0ebe3; color: var(--text); }
+
+  .doc-wrapper { max-width: 880px; margin: 40px auto; background: var(--white); box-shadow: 0 4px 40px rgba(0,0,0,0.12); }
+
+  .doc-header { background: var(--black); padding: 56px 48px; text-align: center; position: relative; }
+  .doc-header::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .org { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 5px; color: var(--bronze); margin-bottom: 10px; }
+  .doc-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  .doc-header .sub { font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  .toc-bar { background: #1a1208; padding: 24px 48px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .toc-bar a { color: var(--bronze); font-size: 12px; text-decoration: none; letter-spacing: 0.5px; opacity: 0.85; transition: opacity 0.2s; }
+  .toc-bar a:hover { opacity: 1; text-decoration: underline; }
+
+  .doc-body { padding: 48px; }
+
+  .preamble { background: var(--light-bg); border: 1px solid var(--border); border-left: 4px solid var(--bronze); padding: 24px 28px; margin-bottom: 40px; }
+  .preamble p { font-size: 13px; line-height: 1.8; color: var(--muted); margin-bottom: 10px; }
+  .preamble p:last-child { margin-bottom: 0; }
+  .preamble .title { font-weight: 700; color: var(--black); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+
+  .chapter { margin-bottom: 48px; scroll-margin-top: 20px; }
+  .chapter-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 3px solid var(--bronze); }
+  .chapter-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--bronze); opacity: 0.3; line-height: 1; }
+  .chapter-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--black); line-height: 1; }
+
+  .sub-section { margin-bottom: 28px; padding-left: 16px; border-left: 2px solid var(--border); }
+  .sub-section h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--black); margin-bottom: 12px; }
+  .sub-section p { font-size: 14px; line-height: 1.8; color: var(--text); margin-bottom: 10px; }
+
+  ul.proto { list-style: none; padding: 0; }
+  ul.proto li { font-size: 14px; line-height: 1.7; padding: 7px 0 7px 24px; position: relative; border-bottom: 1px solid #f5f0ea; color: var(--text); }
+  ul.proto li:last-child { border-bottom: none; }
+  ul.proto li::before { content: '—'; position: absolute; left: 0; color: var(--bronze); font-weight: 700; }
+
+  ol.proto { padding-left: 0; list-style: none; counter-reset: pitem; }
+  ol.proto li { counter-increment: pitem; font-size: 14px; line-height: 1.7; padding: 8px 0 8px 32px; position: relative; border-bottom: 1px solid #f5f0ea; }
+  ol.proto li:last-child { border-bottom: none; }
+  ol.proto li::before { content: counter(pitem) '.'; position: absolute; left: 0; color: var(--bronze); font-family: 'Bebas Neue', sans-serif; font-size: 17px; line-height: 1.4; }
+
+  .alert { background: #fff8e6; border: 1px solid #e8c85a; border-left: 4px solid var(--bronze); padding: 14px 18px; margin: 16px 0; }
+  .alert p { font-size: 13px; line-height: 1.7; color: var(--text); margin: 0; }
+  .alert strong { color: var(--black); }
+
+  .emergency-box { background: var(--black); color: var(--white); padding: 24px 28px; border-radius: 2px; margin: 20px 0; }
+  .emergency-box h4 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 12px; }
+  .emergency-box p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+  .emergency-box .hotline { font-size: 20px; font-weight: 700; color: var(--bronze); letter-spacing: 1px; }
+
+  .message-template { background: var(--light-bg); border: 1px solid var(--border); padding: 20px 24px; margin: 16px 0; font-size: 13px; line-height: 1.8; color: var(--text); font-family: 'Georgia', serif; white-space: pre-wrap; }
+
+  .prohibited { background: #fff0f0; border-left: 4px solid #cc4444; padding: 16px 20px; margin: 16px 0; }
+  .prohibited li { font-size: 13px; line-height: 1.7; list-style: disc; margin-left: 20px; color: #cc4444; }
+
+  .ack-box { background: var(--black); padding: 36px 48px; margin-top: 48px; text-align: center; }
+  .ack-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 16px; }
+  .ack-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 24px; }
+  .sig-line-row { display: flex; gap: 32px; justify-content: center; margin-top: 24px; }
+  .sig-field { text-align: left; }
+  .sig-field label { font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.4); text-transform: uppercase; display: block; margin-bottom: 6px; }
+  .sig-line { height: 1px; background: rgba(255,255,255,0.3); width: 200px; }
+
+  footer { background: var(--black); color: rgba(255,255,255,0.3); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<div class="doc-wrapper">
+  <div class="doc-header">
+    <div class="org">The Sharpening Project</div>
+    <h1>Rules & Protocols Manual</h1>
+    <p class="sub">One-on-One Mentoring Model &nbsp;|&nbsp; Full Version</p>
+  </div>
+
+  <div class="toc-bar">
+    <a href="#s0">0. Framing</a>
+    <a href="#s1">1. Definitions</a>
+    <a href="#s2">2. Safety Principles</a>
+    <a href="#s3">3. Mandatory Reporting</a>
+    <a href="#s4">4. Meeting Rules</a>
+    <a href="#s5">5. Communication</a>
+    <a href="#s6">6. Social Media</a>
+    <a href="#s7">7. Moral Standards</a>
+    <a href="#s8">8. Difficult Issues</a>
+    <a href="#s9">9. Self-Harm Protocol</a>
+    <a href="#s10">10. Discipline</a>
+    <a href="#s11">11. Documentation</a>
+    <a href="#s12">12. Events</a>
+    <a href="#s13">13. Parent Relations</a>
+    <a href="#s14">14. Training</a>
+    <a href="#s15">15. Acknowledgment</a>
+  </div>
+
+  <div class="doc-body">
+
+    <div id="s0" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">0</div>
+        <h2>Legal & Spiritual Framing</h2>
+      </div>
+      <div class="preamble">
+        <div class="title">Legal Disclaimer</div>
+        <p>This policy manual is a general template for The Sharpening Project and is not legal advice. Laws vary by state and may change over time. In Tennessee, everyone is a mandatory reporter of suspected child abuse and neglect. All leaders, mentors, and volunteers must comply with Tennessee law and with any additional policies of the host church or partnering organization.</p>
+        <p>This document should be reviewed and approved by the host church leadership and legal counsel before implementation.</p>
+      </div>
+      <p style="font-size:14px;line-height:1.8;color:var(--text);">The Sharpening Project is a Christ-centered mentorship program. Every policy here exists to protect students, honor parents, safeguard mentors, and glorify God. Leaders agree to submit to both Scripture and civil authority in matters of safety, integrity, and care for minors.</p>
+    </div>
+
+    <div id="s1" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">1</div>
+        <h2>Definitions and Scope</h2>
+      </div>
+      <div class="sub-section">
+        <h3>Program Roles</h3>
+        <ul class="proto">
+          <li><strong>Student / Mentee</strong> — A middle-school or early high-school male participating in the program.</li>
+          <li><strong>Mentor</strong> — A high-school upperclassman approved to meet one-on-one with a student.</li>
+          <li><strong>Program Director</strong> — The student leader overseeing day-to-day operations.</li>
+          <li><strong>Head Advisor</strong> — Adult ministry leader / pastor providing spiritual oversight.</li>
+          <li><strong>Lead Mentor Coordinator</strong> — Leader overseeing mentor assignments and weekly check-ins.</li>
+          <li><strong>Media & Liaison Coordinator</strong> — Leader handling communication to parents and mentors.</li>
+          <li><strong>Parent / Guardian</strong> — Legal parent or guardian who has signed the Parent Liability & Consent form.</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3>Covered Activities</h3>
+        <p>These rules apply to all one-on-one mentoring meetings, all program-organized events, all digital communication under the banner of The Sharpening Project, and any informal hangouts connected to the mentor–student relationship.</p>
+      </div>
+    </div>
+
+    <div id="s2" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">2</div>
+        <h2>Core Safety Principles</h2>
+      </div>
+      <div class="alert"><p><strong>If there is ever a conflict between convenience and safety, safety wins. If there is ever confusion between personal privacy and legal reporting, the law wins.</strong></p></div>
+      <div class="sub-section">
+        <h3>Transparency and Documentation</h3>
+        <p>Parents always know: who their son is with, where the meeting is, when it starts and ends, and how the student is getting there and back. Leadership always has current contact information, signed forms and waivers, and a record of meetings and incidents.</p>
+      </div>
+      <div class="sub-section">
+        <h3>No One Walks Alone</h3>
+        <p>Students do not carry heavy issues alone. Mentors do not handle crises alone. Leaders do not make high-risk decisions alone.</p>
+      </div>
+    </div>
+
+    <div id="s3" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">3</div>
+        <h2>Mandatory Reporting (Tennessee-Aware)</h2>
+      </div>
+      <div class="alert"><p><strong>In Tennessee, everyone is a mandated reporter.</strong> Failure to report is a crime. Those who report in good faith are generally protected from civil or criminal liability.</p></div>
+      <div class="sub-section">
+        <h3>What Must Be Reported</h3>
+        <ul class="proto">
+          <li>Physical abuse (hitting, beating, intentional injury)</li>
+          <li>Sexual abuse or exploitation</li>
+          <li>Emotional abuse</li>
+          <li>Neglect (failure to provide basic needs)</li>
+          <li>A child witnessing abuse or domestic violence in the home</li>
+          <li>Self-harm or suicidal intent</li>
+          <li>Serious threats of violence toward others</li>
+        </ul>
+      </div>
+      <div class="emergency-box">
+        <h4>How to Report in Tennessee</h4>
+        <p class="hotline">1-877-237-0004</p>
+        <p>Tennessee Child Abuse Hotline — available 24/7</p>
+        <p>Online (non-emergency): apps.tn.gov/carat</p>
+        <p>Emergency / immediate danger: call <strong>911</strong> first.</p>
+      </div>
+      <p style="font-size:14px;line-height:1.8;color:var(--text);margin-top:16px;">After reporting to civil authorities, mentors must also notify the Program Director and Head Advisor and complete a written incident report within 24 hours. <strong>Reporting to internal leadership does not replace the legal duty to report to civil authorities.</strong></p>
+    </div>
+
+    <div id="s4" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">4</div>
+        <h2>One-on-One Meeting Rules</h2>
+      </div>
+      <div class="sub-section">
+        <h3>Location Requirements</h3>
+        <p>All regular weekly meetings must be in a public place (park, coffee shop, restaurant, church common area), or in a private home only if parents have given explicit written consent AND at least one other responsible adult is present. No closed bedrooms, locked rooms, or isolated areas.</p>
+      </div>
+      <div class="sub-section">
+        <h3>Transportation</h3>
+        <ul class="proto">
+          <li>Mentors may give rides only with written parental permission.</li>
+          <li>Must have a valid driver's license, auto insurance, and follow all traffic laws.</li>
+          <li>Seatbelts must be used correctly at all times.</li>
+          <li>If transporting more than one student, parents must approve in advance.</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3>Time and Duration</h3>
+        <p>One meeting per week, minimum 2 hours. Meetings should stay within agreed time windows to respect family schedules.</p>
+      </div>
+      <div class="sub-section">
+        <h3>No Overnights</h3>
+        <p>No overnight events, trips, or stays without written approval from the Head Advisor and church leadership, plus specific trip policies. No alcohol, drugs, vaping, or illegal activity — if present, the meeting must end and be reported.</p>
+      </div>
+    </div>
+
+    <div id="s5" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">5</div>
+        <h2>Communication Protocols</h2>
+      </div>
+      <div class="alert"><p><strong>Assume every message could be read by parents and leadership.</strong> All communication must be respectful, appropriate, and Christ-honoring.</p></div>
+      <div class="sub-section">
+        <h3>Texting & Direct Messages</h3>
+        <ul class="proto">
+          <li>No romantic or flirtatious language.</li>
+          <li>No late-night conversations (recommended window: 7 AM – 10 PM).</li>
+          <li>If conversation becomes heavy, move toward reporting — do not attempt to counsel.</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3>"Secret" Conversations</h3>
+        <p>If a student asks for secrecy, mentors respond with:</p>
+        <div class="message-template">"I care about you too much to keep anything that could hurt you or someone else a secret."
+
+— or —
+
+"I promise to keep this conversation between us, and not tell anyone in a way that would shame or embarrass you, but if it's related to your health and safety, I care about you too much to keep it a secret."</div>
+      </div>
+    </div>
+
+    <div id="s6" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">6</div>
+        <h2>Social Media and Media Use</h2>
+      </div>
+      <ul class="proto">
+        <li>No photo or video of any student under any circumstances (without signed media consent).</li>
+        <li>Zero social media direct messaging contact of any kind between mentors and students.</li>
+        <li>Never share a student's struggles or story online.</li>
+        <li>Never share screenshots of private messages.</li>
+      </ul>
+    </div>
+
+    <div id="s7" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">7</div>
+        <h2>Spiritual & Moral Leadership Standards</h2>
+      </div>
+      <div class="sub-section">
+        <h3>Personal Conduct</h3>
+        <p>Mentors and leaders are expected to live in a manner consistent with biblical Christian faith and avoid profanity, pornography use, drunkenness, drug use, or illegal activity. If a mentor is battling something affecting their ability to lead, they must disclose it to the Program Director or Head Advisor and step back if needed.</p>
+      </div>
+      <div class="sub-section">
+        <h3>Conversations About Dating & Sexuality</h3>
+        <p>Mentors do not encourage secret relationships or give "tips" on dating or sexual behavior. If these topics arise: listen, point to Scripture and God's design, encourage talking with parents, and involve leadership if the situation seems unsafe.</p>
+      </div>
+    </div>
+
+    <div id="s8" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">8</div>
+        <h2>Handling Difficult Issues (Non-Emergency)</h2>
+      </div>
+      <p style="font-size:14px;line-height:1.8;margin-bottom:16px;">These topics must be shared with program leadership (Program Director / Head Advisor / Mentor Coordinator) immediately:</p>
+      <ul class="proto">
+        <li>Pornography or sexual addiction struggles</li>
+        <li>Ongoing anxiety, depression, or disordered eating</li>
+        <li>Substance use or experimentation</li>
+        <li>Family crisis (divorce, eviction, serious illness)</li>
+        <li>Identity struggles (sexuality, gender), intense shame, or confusion</li>
+        <li>Any situation where the mentor feels out of their depth</li>
+      </ul>
+    </div>
+
+    <div id="s9" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">9</div>
+        <h2>Self-Harm and Suicide Protocol</h2>
+      </div>
+      <div class="alert"><p>If a student mentions self-harm, suicidal thoughts, or a desire to "not be here anymore," treat it seriously.</p></div>
+      <div class="sub-section">
+        <h3>Immediate Steps</h3>
+        <ol class="proto">
+          <li>Stay calm, listen, and take them seriously.</li>
+          <li>Thank them for trusting you.</li>
+          <li>Say: "I am really glad you told me. You are not alone in this."</li>
+        </ol>
+      </div>
+      <div class="sub-section">
+        <h3>Follow-Up Questions</h3>
+        <ul class="proto">
+          <li>How often do you have these thoughts?</li>
+          <li>Have you ever made a plan or tried to act on them?</li>
+          <li>Is there anything that makes these thoughts worse?</li>
+          <li>Do your parents know about this?</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3>Reporting and Escalation</h3>
+        <ul class="proto">
+          <li>Inform parents as soon as possible.</li>
+          <li>Inform Program Director and Head Advisor.</li>
+          <li>If there is immediate danger, call 911.</li>
+          <li>Complete a written incident report within 24 hours.</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3>Message to Parents (Copy & Fill)</h3>
+        <div class="message-template">Dear [Parent Name],
+
+This is [Mentor Name]. I have been mentoring your [Student Name]. They have been such a joy to mentor. Unfortunately they have brought up [brief description of area of concern]. According to our protocol we need to take this to their parents. We won't be excluding the student from the program, however we cannot proceed without letting you know. I've also informed program leadership so we can walk through this responsibly and with care.
+
+Please let me know the best way to connect when you're able. Our priority is [Student Name]'s safety and well-being.
+
+— [Mentor Name], The Sharpening Project</div>
+      </div>
+    </div>
+
+    <div id="s10" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">10</div>
+        <h2>Discipline and Prohibited Conduct</h2>
+      </div>
+      <div class="sub-section">
+        <h3>Prohibited Adult Behaviors</h3>
+        <div class="prohibited">
+          <ul>
+            <li>Any sexual contact, comment, or behavior toward a student</li>
+            <li>Romantic or emotionally dependent relationships with a student</li>
+            <li>Physical discipline (hitting, grabbing in anger, etc.)</li>
+            <li>Sharing sexual stories, explicit jokes, or pornography</li>
+            <li>Supplying or using drugs, alcohol, or vapes with or around students</li>
+            <li>Harassment, bullying, or belittling language</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sub-section">
+        <h3>Responding to Student Misconduct</h3>
+        <p>Stay calm, firm, and respectful. Do not shame or humiliate publicly. If serious (illegal substance, violent behavior, harassment): end the meeting if needed, then inform parents and leadership immediately.</p>
+      </div>
+    </div>
+
+    <div id="s11" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">11</div>
+        <h2>Documentation, Records, and Forms</h2>
+      </div>
+      <div class="sub-section">
+        <h3>Required Forms — Students</h3>
+        <ul class="proto"><li>Signed Parent Liability & Consent form</li><li>Any additional church-required forms</li></ul>
+      </div>
+      <div class="sub-section">
+        <h3>Required Forms — Mentors</h3>
+        <ul class="proto"><li>Approved application and screening</li><li>High Credibility Statement from a church/youth leader</li><li>Signed Mentor Commitment Waiver</li></ul>
+      </div>
+      <div class="sub-section">
+        <h3>Incident Reports Required For</h3>
+        <ul class="proto"><li>Suspected abuse or neglect</li><li>Self-harm or suicidal disclosures</li><li>Major behavioral incidents</li></ul>
+        <p style="font-size:14px;line-height:1.7;margin-top:12px;">Reports must include date and time, who was present, exact words or summary of what was disclosed, and actions taken. Stored securely and accessible only to Program Director, Head Advisor, and designated church leadership.</p>
+      </div>
+    </div>
+
+    <div id="s12" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">12</div>
+        <h2>Large-Group Event Protocols</h2>
+      </div>
+      <ul class="proto">
+        <li>Adequate adult supervision required; leadership maintains a visible presence.</li>
+        <li>Clear start and end times; attendance records must be kept.</li>
+        <li>Parents must know where the event is and when to pick up their son.</li>
+        <li>Use public, open spaces whenever possible; avoid dark, isolated corners.</li>
+        <li>Any conflict, injury, or concerning behavior is documented and reported.</li>
+      </ul>
+    </div>
+
+    <div id="s13" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">13</div>
+        <h2>Parent and Church Relationship</h2>
+      </div>
+      <p style="font-size:14px;line-height:1.8;margin-bottom:16px;">The Sharpening Project respects that parents are the primary spiritual and moral leaders of their children. Mentors do not undermine parents, do not encourage secrecy from parents, and encourage students to communicate honestly with their families. The program operates under the authority of the host church — church policies on child protection, background checks, and facility use are binding.</p>
+    </div>
+
+    <div id="s14" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">14</div>
+        <h2>Training and Annual Review</h2>
+      </div>
+      <div class="sub-section">
+        <h3>Initial Training</h3>
+        <p>All mentors and leaders must attend a kickoff training covering these Rules & Protocols, mandatory reporting and Tennessee law, scenario role-plays, and program documentation and forms.</p>
+      </div>
+      <div class="sub-section">
+        <h3>Ongoing Training</h3>
+        <p>At least once per year: a refresher training on safety, reporting, and program values. Mentors are encouraged to regularly revisit this manual and ask questions if anything is unclear.</p>
+      </div>
+    </div>
+
+    <div id="s15" class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">15</div>
+        <h2>Acknowledgment and Agreement</h2>
+      </div>
+      <p style="font-size:14px;line-height:1.8;margin-bottom:24px;">Every mentor and leader must sign an acknowledgment that they have read this manual in full, understand their legal duty as mandated reporters in Tennessee, and agree to follow these policies and submit to program and church leadership in matters of safety and conduct.</p>
+
+      <div class="ack-box">
+        <h3>Signature of Acknowledgment</h3>
+        <p>By signing below, I confirm I have read, understood, and agree to follow The Sharpening Project Rules & Protocols Manual in its entirety.</p>
+        <div class="sig-line-row">
+          <div class="sig-field">
+            <label>Name (Print)</label>
+            <div class="sig-line"></div>
+          </div>
+          <div class="sig-field">
+            <label>Signature</label>
+            <div class="sig-line"></div>
+          </div>
+          <div class="sig-field">
+            <label>Date</label>
+            <div class="sig-line" style="width:120px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>The Sharpening Project</span> &nbsp;|&nbsp; Rules & Protocols Manual — Full Version
+  </footer>
+</div>
+
+</body>
+</html>

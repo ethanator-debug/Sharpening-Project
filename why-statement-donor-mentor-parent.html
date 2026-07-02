@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Why & Three Core Goals (Donor, Mentor & Parent Versions)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --black: #0f0f0f; --bronze: #c9952a; --cream: #f8f4ef; --white: #fff; --text: #2c2c2c; --muted: #666; }
+  body { font-family: 'Lato', sans-serif; background: #f0ebe3; color: var(--text); }
+
+  .page-header {
+    background: var(--black);
+    padding: 56px 40px 48px;
+    text-align: center;
+    position: relative;
+  }
+  .page-header::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .org { font-size: 11px; letter-spacing: 5px; color: var(--bronze); font-family: 'Bebas Neue', sans-serif; margin-bottom: 12px; }
+  .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 5vw, 60px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  .page-header p { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .tabs { display: flex; background: #1a1208; border-bottom: 2px solid rgba(201,149,42,0.2); }
+  .tab { flex: 1; padding: 16px 20px; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 2px; color: rgba(255,255,255,0.35); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; }
+  .tab.active { color: var(--bronze); border-bottom-color: var(--bronze); background: rgba(201,149,42,0.07); }
+
+  .version { display: none; }
+  .version.active { display: block; }
+
+  /* DONOR VERSION */
+  .donor { background: var(--black); color: var(--white); }
+  .d-hero { padding: 72px 40px 56px; text-align: center; border-bottom: 1px solid rgba(201,149,42,0.15); background: linear-gradient(160deg, #1a1208 0%, #0f0f0f 100%); }
+  .d-badge { background: var(--bronze); color: var(--black); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; display: inline-block; margin-bottom: 24px; }
+  .d-hero h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 7vw, 80px); letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 16px; }
+  .d-hero .tagline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px, 3vw, 28px); letter-spacing: 2px; color: var(--bronze); }
+
+  .d-body { max-width: 820px; margin: 0 auto; padding: 56px 40px; }
+  .d-section-label { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 4px; color: var(--bronze); opacity: 0.6; margin-bottom: 6px; }
+  .d-section h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--white); margin-bottom: 20px; }
+  .d-section { margin-bottom: 48px; }
+  .d-section p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 12px; }
+  .d-goals { list-style: none; padding: 0; }
+  .d-goal { padding: 20px 0; border-bottom: 1px solid rgba(201,149,42,0.1); display: grid; grid-template-columns: 30px 1fr; gap: 16px; align-items: start; }
+  .d-goal:last-child { border-bottom: none; }
+  .d-goal-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--bronze); opacity: 0.4; line-height: 1; }
+  .d-goal-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--bronze); margin-bottom: 6px; }
+  .d-goal p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 0; }
+  .d-bullet { list-style: none; padding: 0; margin: 12px 0; }
+  .d-bullet li { font-size: 14px; padding: 6px 0 6px 20px; position: relative; color: rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .d-bullet li:last-child { border-bottom: none; }
+  .d-bullet li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+  .d-uses { background: rgba(201,149,42,0.08); border: 1px solid rgba(201,149,42,0.2); padding: 20px 24px; }
+  .d-uses-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; }
+  .d-uses ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+  .d-uses li { font-size: 12px; color: rgba(255,255,255,0.5); padding-left: 14px; position: relative; }
+  .d-uses li::before { content: '✓'; position: absolute; left: 0; color: var(--bronze); }
+
+  /* PARENT VERSION */
+  .parent-v { background: var(--cream); }
+  .p-hero { background: var(--black); padding: 56px 40px 48px; text-align: center; position: relative; }
+  .p-hero::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .p-badge { background: var(--bronze); color: var(--black); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; display: inline-block; margin-bottom: 20px; }
+  .p-hero h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 72px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  .p-hero p { font-size: 14px; color: rgba(255,255,255,0.45); font-style: italic; }
+  .p-body { max-width: 820px; margin: 0 auto; padding: 56px 40px; }
+  .p-why { font-size: 15px; line-height: 1.85; color: var(--text); margin-bottom: 24px; }
+  .p-statement { font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 3vw, 30px); letter-spacing: 1.5px; color: var(--black); line-height: 1.3; border-left: 5px solid var(--bronze); padding-left: 24px; margin-bottom: 24px; }
+  .p-section { margin-bottom: 40px; }
+  .p-section h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--black); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--bronze); }
+  .p-goals { display: flex; flex-direction: column; gap: 16px; }
+  .p-goal { background: var(--white); padding: 20px 24px; border-left: 4px solid var(--bronze); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .p-goal-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
+  .p-goal-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--black); margin-bottom: 8px; }
+  .p-goal p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .p-commit { background: var(--black); color: var(--white); padding: 32px; text-align: center; }
+  .p-commit h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 14px; }
+  .p-commit p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+  .p-uses { background: var(--white); border-top: 3px solid var(--bronze); padding: 20px; margin-top: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .p-uses-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+  .p-uses ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .p-uses li { font-size: 12px; color: var(--muted); background: #f5f0e8; padding: 4px 12px; }
+
+  /* MENTOR VERSION */
+  .mentor-v { background: var(--black); color: var(--white); }
+  .m-hero { padding: 72px 40px 56px; text-align: center; background: linear-gradient(160deg, #1a1208, #0f0f0f); border-bottom: 1px solid rgba(201,149,42,0.15); }
+  .m-badge { background: rgba(201,149,42,0.15); border: 1px solid var(--bronze); color: var(--bronze); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; display: inline-block; margin-bottom: 24px; }
+  .m-hero h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 7vw, 80px); letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 16px; }
+  .m-hero .tagline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(16px, 2.5vw, 22px); letter-spacing: 3px; color: var(--bronze); }
+  .m-body { max-width: 820px; margin: 0 auto; padding: 56px 40px; }
+  .m-section { margin-bottom: 40px; }
+  .m-label { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 4px; color: var(--bronze); opacity: 0.6; margin-bottom: 6px; }
+  .m-section h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--white); margin-bottom: 20px; }
+  .m-section p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 12px; }
+  .m-calling { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 3.5vw, 32px); letter-spacing: 2px; color: var(--bronze); border-left: 4px solid var(--bronze); padding-left: 20px; margin-bottom: 24px; line-height: 1.3; }
+  .m-goals { display: flex; flex-direction: column; gap: 0; }
+  .m-goal { padding: 28px 0; border-bottom: 1px solid rgba(201,149,42,0.1); }
+  .m-goal:last-child { border-bottom: none; }
+  .m-goal-num { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 3px; color: var(--bronze); opacity: 0.6; margin-bottom: 4px; }
+  .m-goal-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--bronze); margin-bottom: 12px; }
+  .m-goal p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 8px; }
+  .m-commit { background: rgba(201,149,42,0.08); border: 1px solid rgba(201,149,42,0.2); padding: 28px; margin-top: 8px; }
+  .m-commit-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 16px; }
+  .m-commit-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+  .m-commit-list li { font-size: 13px; color: rgba(255,255,255,0.6); padding: 6px 0 6px 16px; position: relative; }
+  .m-commit-list li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+
+  .tab-select-note { text-align: center; font-size: 13px; color: var(--muted); padding: 20px; background: #f5f0e8; border-bottom: 1px solid var(--border); }
+
+  footer { background: var(--black); color: rgba(255,255,255,0.25); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="org">The Sharpening Project</div>
+  <h1>Why Statement &<br>Three Core Goals</h1>
+  <p>Three audience-specific versions — Donor/Investor, Parent, and Mentor</p>
+</div>
+
+<!-- Tab Navigation -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('donor')">Donor / Investor</div>
+  <div class="tab" onclick="showTab('parent')">Parent</div>
+  <div class="tab" onclick="showTab('mentor')">Mentor</div>
+</div>
+
+<!-- DONOR VERSION -->
+<div id="donor" class="version active donor">
+  <div class="d-hero">
+    <div class="d-badge">Donor & Church Partner Version</div>
+    <h2>The Sharpening Project</h2>
+    <div class="tagline">Why Statement & Three Core Goals</div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.4);margin-top:12px;font-style:italic;">A Generation-Wide Discipleship Movement</div>
+  </div>
+  <div class="d-body">
+    <div class="d-section">
+      <div class="d-section-label">Why We Exist</div>
+      <h3>Why We Exist</h3>
+      <p>A generation of young men is being raised in a culture of confusion, isolation, and spiritual drift. We believe God is calling this generation back to Himself — and that revival starts with discipleship, brotherhood, and truth.</p>
+      <p>The Sharpening Project exists to build a Christ-centered movement where young men discover identity, develop strength, and walk in lasting freedom. This is more than mentorship — it is spiritual formation, leadership development, and character transformation.</p>
+      <p>We exist so young men can:</p>
+      <ul class="d-bullet">
+        <li>Know who they are in Christ</li>
+        <li>Walk boldly in God's purpose</li>
+        <li>Develop into courageous leaders</li>
+        <li>Experience real freedom from temptation and darkness</li>
+        <li>Build lifelong relationships with godly mentors</li>
+      </ul>
+      <p style="margin-top:16px;font-style:italic;">This is a movement of brothers sharpening brothers, preparing a generation to stand unshaken.</p>
+    </div>
+    <div class="d-section">
+      <div class="d-section-label">Our Mission</div>
+      <h3>Three Core Goals</h3>
+      <ul class="d-goals">
+        <div class="d-goal"><div class="d-goal-num">1</div><div><div class="d-goal-title">Loved & Safe</div><p>Build a culture where every student feels seen, valued, known, and spiritually protected.</p></div></div>
+        <div class="d-goal"><div class="d-goal-num">2</div><div><div class="d-goal-title">Lead with Strength</div><p>Raise mentors who model Christlike humility, courage, integrity, and leadership.</p></div></div>
+        <div class="d-goal"><div class="d-goal-num">3</div><div><div class="d-goal-title">Lasting Freedom</div><p>Guide young men into genuine transformation — freedom rooted in Scripture, accountability, and the Holy Spirit.</p></div></div>
+      </ul>
+    </div>
+    <div class="d-uses">
+      <div class="d-uses-label">This Version is Perfect For</div>
+      <ul><li>Investor pitch decks</li><li>Church partner meetings</li><li>Global expansion playbooks</li><li>University / nonprofit grant proposals</li><li>Vision-casting events</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- PARENT VERSION -->
+<div id="parent" class="version parent-v">
+  <div class="p-hero">
+    <div class="p-badge">Parent-Facing Version</div>
+    <h2>Why & Three Core Goals</h2>
+    <p>What parents deserve to know most.</p>
+  </div>
+  <div class="p-body">
+    <div class="p-section">
+      <h3>Why We Exist</h3>
+      <p class="p-why">We believe no young man should walk through life alone. Middle school and early high school can be overwhelming — pressure, temptation, identity questions, and the desire to belong. The Sharpening Project exists to give young men a safe, Christ-centered place to grow, talk openly, be mentored, and build real confidence in who God created them to be.</p>
+      <p class="p-why">Our heart is simple:</p>
+      <div class="p-statement">We want your son to be loved, supported, and strengthened — spiritually, emotionally, and personally.</div>
+      <p class="p-why">Through trusted mentors, weekly one-on-one meetings, and monthly hangouts, students gain guidance, friendship, and biblical truth to help them navigate life with clarity and courage.</p>
+    </div>
+    <div class="p-section">
+      <h3>Three Core Goals (For Your Son)</h3>
+      <div class="p-goals">
+        <div class="p-goal"><div class="p-goal-num">Goal 01</div><div class="p-goal-title">Loved & Safe</div><p>Your son will be known, valued, and supported in a safe, parent-honoring environment.</p></div>
+        <div class="p-goal"><div class="p-goal-num">Goal 02</div><div class="p-goal-title">Lead with Strength</div><p>Older students model what it looks like to follow Christ with humility, courage, and integrity.</p></div>
+        <div class="p-goal"><div class="p-goal-num">Goal 03</div><div class="p-goal-title">Lasting Freedom</div><p>We help young men grow in their faith, overcome struggles, and walk in real freedom through Christ.</p></div>
+      </div>
+    </div>
+    <div class="p-commit">
+      <h3>Our Commitment to Parents</h3>
+      <p>We take safety, communication, spiritual integrity, and leadership training seriously. Every mentor is vetted, trained, and closely supervised. Your son will always be seen, supported, and prayed for.</p>
+    </div>
+    <div class="p-uses">
+      <div class="p-uses-label">This Version is Perfect For</div>
+      <ul><li>Parent recruitment flyers</li><li>Parent welcome packets</li><li>Website "About" pages</li><li>Social media info posts</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- MENTOR VERSION -->
+<div id="mentor" class="version mentor-v">
+  <div class="m-hero">
+    <div class="m-badge">Mentor-Facing Version</div>
+    <h2>Your Why<br>as a Mentor</h2>
+    <div class="tagline">This is what you're called into.</div>
+  </div>
+  <div class="m-body">
+    <div class="m-section">
+      <div class="m-label">Why We Exist</div>
+      <h3>Why We Exist</h3>
+      <p>The Sharpening Project exists because young men need godly leaders — older brothers in the faith who will walk with them, listen, lead, and sharpen them into the men God is calling them to be.</p>
+      <p>As a mentor, you step into that calling. You're not just hanging out with students. You're shaping futures. You're building leaders. You're fighting for a generation's spiritual freedom.</p>
+      <div class="m-calling">"You're saying, 'Follow me as I follow Christ.'"</div>
+    </div>
+    <div class="m-section">
+      <div class="m-label">Our Mission</div>
+      <h3>Three Core Goals (For Your Role)</h3>
+      <div class="m-goals">
+        <div class="m-goal">
+          <div class="m-goal-num">Goal 01</div>
+          <div class="m-goal-title">Loved & Safe</div>
+          <p>Your job is to create a space where your student feels safe, valued, and understood.</p>
+          <p><strong style="color:var(--white);">Safety is non-negotiable. Love is the foundation.</strong></p>
+        </div>
+        <div class="m-goal">
+          <div class="m-goal-num">Goal 02</div>
+          <div class="m-goal-title">Lead with Strength</div>
+          <p>You model what biblical manhood looks like: humility, courage, consistency, integrity, and faithfulness.</p>
+          <p><strong style="color:var(--white);">Your life preaches louder than your words.</strong></p>
+        </div>
+        <div class="m-goal">
+          <div class="m-goal-num">Goal 03</div>
+          <div class="m-goal-title">Lasting Freedom</div>
+          <p>You walk with your student through challenges, temptation, and growth — always pointing them toward Christ, Scripture, and the Holy Spirit.</p>
+          <p><strong style="color:var(--white);">Freedom happens when consistency meets truth.</strong></p>
+        </div>
+      </div>
+    </div>
+    <div class="m-commit">
+      <div class="m-commit-title">Your Commitment as a Mentor</div>
+      <ul class="m-commit-list">
+        <li>Be present</li>
+        <li>Be consistent</li>
+        <li>Be genuine</li>
+        <li>Be accountable</li>
+        <li>Be prayerful</li>
+        <li>Be a living example of Christ</li>
+      </ul>
+      <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:20px;line-height:1.7;text-align:center;">You are part of something bigger than yourself — a movement raising a generation of strong, unshakable men.</p>
+    </div>
+    <div class="p-uses" style="background:#1c1710;border-top:3px solid var(--bronze);padding:20px;margin-top:24px;">
+      <div class="p-uses-label">This Version is Perfect For</div>
+      <ul class="p-uses-list" style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;">
+        <li style="font-size:12px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);padding:4px 12px;">Mentor handbook</li>
+        <li style="font-size:12px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);padding:4px 12px;">Leadership training nights</li>
+        <li style="font-size:12px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);padding:4px 12px;">Kickoff meeting slides</li>
+        <li style="font-size:12px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);padding:4px 12px;">Internal culture documents</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Why Statement & Three Core Goals — Donor, Mentor & Parent Versions
+</footer>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.version').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(name).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

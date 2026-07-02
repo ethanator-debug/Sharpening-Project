@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Mentor Rules & Protocols Quick Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555;
+    --card-bg: #f8f4ef;
+    --border: #ddd5c8;
+  }
+  body { font-family: 'Lato', sans-serif; background: #1a1208; color: var(--text); min-height: 100vh; }
+
+  .page-header {
+    text-align: center;
+    padding: 52px 32px 44px;
+    border-bottom: 2px solid rgba(201,149,42,0.3);
+  }
+  .page-header .tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--bronze);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .page-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .page-header .note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+    padding: 2px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    padding: 28px;
+    position: relative;
+  }
+  .card.dark { background: #1c1710; color: var(--white); }
+
+  .card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--bronze);
+    margin-bottom: 6px;
+  }
+  .card h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--black);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--bronze);
+  }
+  .card.dark h2 { color: var(--white); }
+
+  ul.qr { list-style: none; padding: 0; }
+  ul.qr li {
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 6px 0 6px 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    color: var(--text);
+  }
+  .dark ul.qr li { color: rgba(255,255,255,0.8); border-bottom-color: rgba(255,255,255,0.07); }
+  ul.qr li:last-child { border-bottom: none; }
+  ul.qr li::before { content: '—'; position: absolute; left: 0; color: var(--bronze); font-weight: 700; }
+  ul.qr li strong { color: var(--black); font-weight: 700; }
+  .dark ul.qr li strong { color: var(--white); }
+
+  .sub-head {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin: 16px 0 8px;
+  }
+
+  .tag-line {
+    display: inline-block;
+    background: var(--bronze);
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    margin-bottom: 14px;
+    border-radius: 2px;
+  }
+
+  .hotline-box {
+    background: var(--bronze);
+    color: var(--black);
+    padding: 12px 16px;
+    border-radius: 2px;
+    margin: 12px 0;
+    text-align: center;
+  }
+  .hotline-box .num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; }
+  .hotline-box .label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+  .script {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid var(--bronze);
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+
+  .never-do {
+    background: rgba(200,50,50,0.1);
+    border-left: 3px solid #cc4444;
+    padding: 12px 14px;
+    margin: 8px 0;
+  }
+  .never-do p { font-size: 12px; color: #cc6666; margin-bottom: 4px; line-height: 1.5; }
+  .never-do p::before { content: '✕  '; font-weight: 700; }
+
+  .footer-bar {
+    background: #0a0a0a;
+    text-align: center;
+    padding: 20px;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .footer-bar span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="tag">The Sharpening Project</div>
+  <h1>Mentor Rules &<br>Protocols</h1>
+  <p class="note">Quick Reference Card — This does not replace the full manual. You are expected to read and follow the full document.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="card-num">Section 1</div>
+    <h2>Big Picture</h2>
+    <ul class="qr">
+      <li>This is a <strong>Christ-centered</strong> mentoring program.</li>
+      <li>Parents are the <strong>primary leaders</strong> of their sons.</li>
+      <li><strong>Safety &gt; convenience</strong> every time.</li>
+      <li>Tennessee law: <strong>everyone is a mandatory reporter</strong> of suspected abuse or neglect.</li>
+    </ul>
+  </div>
+
+  <div class="card dark">
+    <div class="card-num">Section 2</div>
+    <h2>Before You Meet</h2>
+    <div class="sub-head">You may only mentor if:</div>
+    <ul class="qr">
+      <li>You are an approved mentor (application, signed waiver).</li>
+      <li>The student's parent has turned in a signed Consent form.</li>
+      <li>Parents know: <strong>who, where, when, and how long</strong>.</li>
+    </ul>
+    <div class="sub-head">Location Rules</div>
+    <ul class="qr">
+      <li>Public place (park, coffee shop, restaurant), OR</li>
+      <li>Private home only with written parent consent + another adult present.</li>
+      <li>No closed bedrooms, locked rooms, or isolated spaces.</li>
+    </ul>
+    <div class="sub-head">Transportation</div>
+    <ul class="qr">
+      <li>Only with written parent permission.</li>
+      <li>Valid driver's license + insurance required.</li>
+      <li>Seatbelts always. Advance permission for multiple students.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-num">Section 3</div>
+    <h2>Communication Rules</h2>
+    <ul class="qr">
+      <li>Assume everything can be read by parents and leadership.</li>
+      <li>Respectful, appropriate, Christ-honoring — always.</li>
+      <li>No romantic or flirty messages.</li>
+      <li>No late-night conversations (aim for 7 AM – 10 PM).</li>
+      <li>Use group chats with parents when possible.</li>
+    </ul>
+    <div class="sub-head">If They Ask for Secrecy</div>
+    <div style="background:#fdf6e3;border-left:3px solid var(--bronze);padding:12px 14px;margin-top:8px;font-style:italic;font-size:13px;line-height:1.6;color:var(--text);">"I care about you too much to keep anything that could hurt you or someone else a secret."</div>
+  </div>
+
+  <div class="card dark">
+    <div class="card-num">Section 4</div>
+    <h2>Social Media & Photos</h2>
+    <ul class="qr">
+      <li>No photos of students without signed media consent.</li>
+      <li>No social media DMs with students — treat same as texting.</li>
+      <li>Never share a student's story or private messages publicly.</li>
+      <li>Do not tag students under 18 without explicit parent permission.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-num">Section 5</div>
+    <h2>Spiritual Standards</h2>
+    <ul class="qr">
+      <li>Walk with Jesus consistently in biblical faith.</li>
+      <li>Avoid profanity, pornography, drunkenness, drug use, illegal activity.</li>
+      <li>If personally struggling with something affecting your mentoring — tell leadership.</li>
+      <li>Keep phones away during meetings; come prayed up.</li>
+    </ul>
+    <div class="sub-head">Dating & Sexuality Topics</div>
+    <ul class="qr">
+      <li>Listen → Point to Scripture → Encourage talking to parents → Involve leadership if unsafe.</li>
+    </ul>
+  </div>
+
+  <div class="card dark">
+    <div class="card-num">Section 6</div>
+    <h2>Hard Topics (Non-Emergency)</h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:12px;">Tell leadership immediately if a student shares:</p>
+    <ul class="qr">
+      <li>Porn or sexual addiction</li>
+      <li>Ongoing anxiety, depression, or disordered eating</li>
+      <li>Substance use</li>
+      <li>Serious family crisis</li>
+      <li>Identity struggles or intense shame</li>
+      <li>Anything that feels too big for you</li>
+    </ul>
+    <div class="sub-head">How to Share</div>
+    <ul class="qr">
+      <li>Short and factual: what they said, when, any obvious risk.</li>
+      <li>Avoid gossip. Protect dignity. Don't hide real issues.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-num">Section 7</div>
+    <h2>Self-Harm & Suicide</h2>
+    <div class="sub-head">Immediate Steps</div>
+    <ul class="qr">
+      <li>Stay calm. Listen.</li>
+      <li>"I am really glad you told me. You are not alone in this."</li>
+      <li>Ask: How often? Have you made a plan? What makes it worse? Do your parents know?</li>
+      <li>You may read Psalm 139 and pray with them.</li>
+    </ul>
+    <div class="sub-head">Reporting</div>
+    <ul class="qr">
+      <li>Inform parents as soon as possible.</li>
+      <li>Inform Program Director and Head Advisor.</li>
+      <li>If immediate danger → call 911.</li>
+      <li>Complete a written incident report within 24 hours.</li>
+    </ul>
+  </div>
+
+  <div class="card dark">
+    <div class="card-num">Section 8</div>
+    <h2>Mandatory Reporting</h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:12px;">Report immediately if you suspect:</p>
+    <ul class="qr">
+      <li>Physical, sexual, or emotional abuse</li>
+      <li>Neglect (basic needs not met)</li>
+      <li>Child witnessing abuse/domestic violence</li>
+      <li>Self-harm or suicidal intent</li>
+      <li>Serious threats to harm someone else</li>
+    </ul>
+    <div class="hotline-box">
+      <div class="label">TN Child Abuse Hotline</div>
+      <div class="num">1-877-237-0004</div>
+    </div>
+    <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px;">Telling leadership does NOT replace your legal duty to report to civil authorities.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-num">Section 9</div>
+    <h2>Never Do These</h2>
+    <div class="never-do">
+      <p>Sexual contact, comments, or romantic behavior toward a student</p>
+      <p>Emotionally dependent or "exclusive" relationship</p>
+      <p>Physical discipline of any kind</p>
+      <p>Share sexual stories, explicit jokes, or pornography</p>
+      <p>Use or provide drugs, alcohol, or vapes near students</p>
+      <p>Harass, bully, or verbally attack students</p>
+    </div>
+  </div>
+
+  <div class="card dark">
+    <div class="card-num">Section 10</div>
+    <h2>Events & Documentation</h2>
+    <div class="sub-head">Events Must Have</div>
+    <ul class="qr">
+      <li>Clear start and end times</li>
+      <li>Adequate adult supervision</li>
+      <li>Open, public spaces when possible</li>
+      <li>Attendance record (mentors + students)</li>
+    </ul>
+    <div class="sub-head">Required Forms</div>
+    <ul class="qr">
+      <li>Students: Signed Parent Consent form</li>
+      <li>Mentors: Application + Credibility Statement + Commitment Waiver</li>
+    </ul>
+    <div class="sub-head">Incident Reports Required For</div>
+    <ul class="qr">
+      <li>Suspected abuse or neglect</li>
+      <li>Self-harm or suicidal talk</li>
+      <li>Major behavioral incidents</li>
+    </ul>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1;">
+    <div class="card-num">Section 11 — Final Reminder</div>
+    <h2>If You Are Ever Unsure</h2>
+    <p style="font-size:15px;line-height:1.8;color:var(--text);max-width:700px;">You are <strong>not</strong> expected to handle things alone. Contact the Program Director, Head Advisor, or Lead Mentor Coordinator. When in doubt about safety, <strong>report</strong>. You are not expected to be a counselor. You are expected to be <strong>honest, humble, careful, and obedient to God and to the law.</strong></p>
+  </div>
+
+</div>
+
+<div class="footer-bar">
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Mentor Quick Reference &nbsp;|&nbsp; Read the full manual before serving
+</div>
+
+</body>
+</html>

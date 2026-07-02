@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Parent Recruitment Flyer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #1a1a1a;
+  }
+  body { font-family: 'Lato', sans-serif; background: #2c2416; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+
+  .flyer {
+    background: var(--cream);
+    width: 100%;
+    max-width: 640px;
+    box-shadow: 0 12px 80px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+
+  .flyer-hero {
+    background: linear-gradient(160deg, #1a1208 0%, var(--black) 100%);
+    padding: 56px 40px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .flyer-hero::before {
+    content: '⚔';
+    font-size: 300px;
+    color: var(--bronze);
+    opacity: 0.04;
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+  }
+  .flyer-hero::after { content: ''; display: block; height: 4px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .org-name { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 6px; color: var(--bronze); margin-bottom: 20px; position: relative; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 8vw, 72px); letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 16px; position: relative; }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); font-style: italic; position: relative; }
+
+  .intro-strip {
+    background: var(--bronze);
+    color: var(--black);
+    padding: 14px 32px;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .flyer-body { padding: 36px 40px; }
+
+  .intro-text { font-size: 15px; line-height: 1.85; color: var(--text); margin-bottom: 32px; border-left: 4px solid var(--bronze); padding-left: 20px; }
+
+  .section { margin-bottom: 28px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--black); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--bronze); }
+  .section p { font-size: 14px; line-height: 1.8; color: var(--text); margin-bottom: 12px; }
+
+  .how-list { list-style: none; padding: 0; }
+  .how-list li { font-size: 14px; line-height: 1.7; padding: 8px 0 8px 28px; position: relative; border-bottom: 1px solid #e8e0d4; color: var(--text); }
+  .how-list li:last-child { border-bottom: none; }
+  .how-list li::before { content: '✓'; position: absolute; left: 0; color: var(--bronze); font-weight: 900; }
+
+  .why-banner {
+    background: var(--black);
+    color: var(--white);
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .why-banner h3 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 3px; color: var(--bronze); margin-bottom: 12px; }
+  .why-banner p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; font-style: italic; }
+
+  .quote-block {
+    background: #f5f0e8;
+    border: 1px solid #d4c8b4;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .quote-block::before { content: '"'; font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--bronze); opacity: 0.15; position: absolute; top: -10px; left: 16px; line-height: 1; }
+  .quote-text { font-size: 14px; line-height: 1.8; color: var(--text); font-style: italic; margin-bottom: 10px; position: relative; }
+  .quote-attr { font-size: 12px; font-weight: 700; color: var(--bronze); letter-spacing: 0.5px; }
+
+  .connect-block {
+    background: var(--black);
+    color: var(--white);
+    padding: 32px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  .connect-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 12px; }
+  .connect-block p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contact-item .contact-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
+  .contact-item .contact-val { font-size: 13px; color: rgba(255,255,255,0.5); font-style: italic; }
+
+  .verse-footer {
+    background: var(--bronze);
+    color: var(--black);
+    padding: 18px 32px;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+  <div class="flyer-hero">
+    <div class="org-name">The Sharpening Project</div>
+    <div class="hero-title">Building Men of<br>Faith, Strength<br>& Purpose</div>
+    <div class="hero-sub">A mentorship program for middle school and high school guys.</div>
+  </div>
+
+  <div class="intro-strip">Christ-Centered · Mentor-Led · Safety-First</div>
+
+  <div class="flyer-body">
+
+    <p class="intro-text">The Sharpening Project is a Christ-centered mentorship program designed to help young men grow in faith, character, and confidence. Our mission is to build a safe, encouraging space where middle school and early high school students can build strong friendships and find guidance from older mentors who follow Christ.</p>
+
+    <div class="section">
+      <div class="section-title">What We Do</div>
+      <p>Through weekly meetups and monthly hangouts, students spend time with trusted high school mentors who care deeply about them, listen, and lead by example. These years can be challenging — filled with peer pressure, insecurities, and the difficulties of growing up. Our mentors help students find strength, maturity, and peace through Christ.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">How It Works</div>
+      <ul class="how-list">
+        <li>Each group includes two mentors and two to three students.</li>
+        <li>Groups meet once a week for at least an hour.</li>
+        <li>Mentors are trained, vetted, and guided by adult leaders and pastors.</li>
+        <li>Every meeting includes prayer, accountability, and encouragement.</li>
+        <li>Monthly hangouts bring everyone together for food, games, and devotionals.</li>
+      </ul>
+    </div>
+
+    <div class="why-banner">
+      <h3>Why We Do It</h3>
+      <p>We believe no young man should walk alone. Our mission is to help every student discover his purpose — to walk closely with God, grow in character, and lead with strength.</p>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote-text">"This program was born out of a calling from God — to create a space where young men can be seen, known, and built up in faith. It's about freedom, growth, and learning to walk with Christ daily."</p>
+      <div class="quote-attr">— Ethan Adnevik, Founder of The Sharpening Project</div>
+    </div>
+
+    <div class="connect-block">
+      <h3>Get Connected</h3>
+      <p>Interested in getting your son involved? Join us at our next event or reach out to learn more!</p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-val">[Insert Email Here]</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Website / Social</div>
+          <div class="contact-val">[Insert Link Here]</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="verse-footer">
+    "As iron sharpens iron, so one man sharpens another." — Proverbs 27:17
+  </div>
+</div>
+
+</body>
+</html>

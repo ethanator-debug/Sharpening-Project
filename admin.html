@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM — The Sharpening Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0f0f0f; --bronze: #c9952a; --cream: #f8f4ef; --white: #fff;
+  --bg: #111; --surface: #1a1a1a; --surface2: #222; --border: rgba(255,255,255,0.07);
+  --text: #e8e8e8; --muted: #888; --danger: #c0392b;
+  --status-new: #c9952a; --status-reviewed: #5b8dee; --status-contacted: #e67e22;
+  --status-active: #27ae60; --status-inactive: #666;
+}
+
+body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+/* Header */
+.header { background: #0a0a0a; border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.header-left { display: flex; align-items: center; gap: 16px; }
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--white); }
+.logo span { color: var(--bronze); }
+.header-right { display: flex; gap: 10px; }
+.btn { font-family: 'Lato', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 8px 16px; border: none; cursor: pointer; border-radius: 2px; transition: opacity 0.15s; }
+.btn:hover { opacity: 0.85; }
+.btn-bronze { background: var(--bronze); color: var(--black); }
+.btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-outline:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn-danger { background: var(--danger); color: var(--white); }
+.btn-sm { font-size: 11px; padding: 6px 12px; }
+
+/* Stats bar */
+.stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; gap: 32px; flex-shrink: 0; }
+.stat { display: flex; align-items: center; gap: 8px; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); }
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.stat-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Toolbar */
+.toolbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
+.search-wrap { position: relative; flex: 1; max-width: 320px; }
+.search-wrap input { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 12px 8px 36px; font-size: 13px; font-family: 'Lato', sans-serif; border-radius: 2px; }
+.search-wrap input::placeholder { color: var(--muted); }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; }
+.filter-select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; font-size: 12px; font-family: 'Lato', sans-serif; border-radius: 2px; cursor: pointer; }
+.filter-select option { background: #222; }
+.count-badge { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+/* Main layout */
+.main { display: flex; flex: 1; overflow: hidden; }
+
+/* Contact list */
+.contact-list-wrap { width: 420px; flex-shrink: 0; border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.contact-list { flex: 1; overflow-y: auto; }
+.contact-list::-webkit-scrollbar { width: 4px; }
+.contact-list::-webkit-scrollbar-track { background: transparent; }
+.contact-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.contact-item { padding: 14px 18px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; position: relative; }
+.contact-item:hover { background: rgba(255,255,255,0.03); }
+.contact-item.active { background: rgba(201,149,42,0.08); border-left: 3px solid var(--bronze); padding-left: 15px; }
+.contact-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.contact-name { font-weight: 700; font-size: 14px; color: var(--white); }
+.contact-meta { font-size: 12px; color: var(--muted); margin-bottom: 6px; line-height: 1.5; }
+.contact-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.role-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 2px; text-transform: uppercase; }
+.role-parent { background: rgba(230,126,34,0.2); color: #e67e22; }
+.role-student { background: rgba(91,141,238,0.2); color: #5b8dee; }
+.role-mentor { background: rgba(39,174,96,0.2); color: #27ae60; }
+.role-donor { background: rgba(201,149,42,0.2); color: var(--bronze); }
+.status-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; white-space: nowrap; }
+.status-new      { background: rgba(201,149,42,0.15); color: var(--bronze); }
+.status-reviewed { background: rgba(91,141,238,0.15); color: #5b8dee; }
+.status-contacted{ background: rgba(230,126,34,0.15); color: #e67e22; }
+.status-active   { background: rgba(39,174,96,0.15); color: #27ae60; }
+.status-inactive { background: rgba(102,102,102,0.15); color: #999; }
+.contact-date { font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+.empty-state { padding: 48px 24px; text-align: center; color: var(--muted); }
+.empty-state .icon { font-size: 32px; margin-bottom: 12px; }
+.empty-state p { font-size: 13px; line-height: 1.6; }
+
+/* Detail panel */
+.detail-panel { flex: 1; overflow-y: auto; padding: 28px 32px; }
+.detail-panel::-webkit-scrollbar { width: 4px; }
+.detail-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.no-selection { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--muted); text-align: center; }
+.no-selection .icon { font-size: 40px; margin-bottom: 16px; opacity: 0.3; }
+.no-selection p { font-size: 13px; }
+
+.detail-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.detail-name { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 6px; }
+.detail-preferred { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.detail-roles { display: flex; flex-wrap: wrap; gap: 6px; }
+.detail-date { font-size: 11px; color: var(--muted); text-align: right; }
+
+.section { margin-bottom: 24px; }
+.section-label { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--bronze); opacity: 0.7; margin-bottom: 12px; text-transform: uppercase; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.info-row { display: flex; flex-direction: column; }
+.info-key { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 2px; }
+.info-val { font-size: 13px; color: var(--text); line-height: 1.5; }
+.info-val.full { grid-column: 1 / -1; }
+.info-block { background: var(--surface2); border: 1px solid var(--border); padding: 14px 16px; border-radius: 2px; }
+
+.crm-section { background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 16px; margin-bottom: 24px; }
+.crm-section h4 { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 2px; color: var(--white); margin-bottom: 12px; }
+.status-select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; font-size: 13px; font-family: 'Lato', sans-serif; border-radius: 2px; margin-bottom: 4px; cursor: pointer; }
+.notes-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; font-size: 13px; font-family: 'Lato', sans-serif; border-radius: 2px; resize: vertical; min-height: 80px; line-height: 1.6; }
+.notes-textarea:focus, .status-select:focus { outline: none; border-color: rgba(201,149,42,0.4); }
+.btn-row { display: flex; gap: 8px; margin-top: 10px; }
+
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+.save-msg { font-size: 11px; color: #27ae60; margin-left: 8px; display: none; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">✦ <span>Sharpening Project</span> CRM</div>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-outline btn-sm" onclick="loadContacts()">↺ Refresh</button>
+    <a href="/api/contacts/export" class="btn btn-bronze btn-sm" style="text-decoration:none;">↓ Export CSV</a>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat"><div class="stat-num" id="statTotal">–</div><div class="stat-label">Total</div></div>
+  <div class="stat"><div class="stat-dot" style="background:var(--status-new)"></div><div class="stat-num" id="statNew">–</div><div class="stat-label">New</div></div>
+  <div class="stat"><div class="stat-dot" style="background:var(--status-contacted)"></div><div class="stat-num" id="statContacted">–</div><div class="stat-label">Contacted</div></div>
+  <div class="stat"><div class="stat-dot" style="background:var(--status-active)"></div><div class="stat-num" id="statActive">–</div><div class="stat-label">Active</div></div>
+  <div class="stat"><div class="stat-dot" style="background:#e67e22"></div><div class="stat-num" id="statParents">–</div><div class="stat-label">Parents</div></div>
+  <div class="stat"><div class="stat-dot" style="background:#27ae60"></div><div class="stat-num" id="statMentors">–</div><div class="stat-label">Mentors</div></div>
+  <div class="stat"><div class="stat-dot" style="background:var(--bronze)"></div><div class="stat-num" id="statDonors">–</div><div class="stat-label">Donors</div></div>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="searchInput" placeholder="Search by name, email, phone..." oninput="filterContacts()">
+  </div>
+  <select class="filter-select" id="statusFilter" onchange="filterContacts()">
+    <option value="">All Statuses</option>
+    <option value="new">New</option>
+    <option value="reviewed">Reviewed</option>
+    <option value="contacted">Contacted</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
+  <select class="filter-select" id="roleFilter" onchange="filterContacts()">
+    <option value="">All Roles</option>
+    <option value="parent_guardian">Parents</option>
+    <option value="potential_student">Potential Students</option>
+    <option value="current_student">Current Students</option>
+    <option value="potential_mentor">Potential Mentors</option>
+    <option value="current_mentor">Current Mentors</option>
+    <option value="donor_investor">Donors / Investors</option>
+  </select>
+  <div class="count-badge" id="countBadge"></div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="contact-list-wrap">
+    <div class="contact-list" id="contactList">
+      <div class="empty-state"><div class="icon">◌</div><p>Loading contacts...</p></div>
+    </div>
+  </div>
+  <div class="detail-panel" id="detailPanel">
+    <div class="no-selection">
+      <div class="icon">✦</div>
+      <p>Select a contact to view details</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let allContacts = [];
+let selectedId = null;
+
+const ROLE_LABELS = {
+  parent_guardian:   'Parent / Guardian',
+  potential_student: 'Potential Student',
+  current_student:   'Current Student',
+  potential_mentor:  'Potential Mentor',
+  current_mentor:    'Current Mentor',
+  donor_investor:    'Donor / Investor',
+};
+const ROLE_CLASS = {
+  parent_guardian:   'role-parent',
+  potential_student: 'role-student',
+  current_student:   'role-student',
+  potential_mentor:  'role-mentor',
+  current_mentor:    'role-mentor',
+  donor_investor:    'role-donor',
+};
+const STATUS_LABELS = {
+  new: 'New', reviewed: 'Reviewed', contacted: 'Contacted', active: 'Active', inactive: 'Inactive'
+};
+
+async function loadContacts() {
+  try {
+    const res = await fetch('/api/contacts');
+    if (!res.ok) throw new Error('Failed');
+    allContacts = await res.json();
+    updateStats();
+    filterContacts();
+  } catch (e) {
+    document.getElementById('contactList').innerHTML = '<div class="empty-state"><div class="icon">✕</div><p>Could not load contacts.<br>Make sure the server is running.</p></div>';
+  }
+}
+
+function updateStats() {
+  const c = allContacts;
+  document.getElementById('statTotal').textContent     = c.length;
+  document.getElementById('statNew').textContent       = c.filter(x => x.status === 'new').length;
+  document.getElementById('statContacted').textContent = c.filter(x => x.status === 'contacted').length;
+  document.getElementById('statActive').textContent    = c.filter(x => x.status === 'active').length;
+  document.getElementById('statParents').textContent   = c.filter(x => x.roles.includes('parent_guardian')).length;
+  document.getElementById('statMentors').textContent   = c.filter(x => x.roles.some(r => r.includes('mentor'))).length;
+  document.getElementById('statDonors').textContent    = c.filter(x => x.roles.includes('donor_investor')).length;
+}
+
+function filterContacts() {
+  const q      = document.getElementById('searchInput').value.toLowerCase();
+  const status = document.getElementById('statusFilter').value;
+  const role   = document.getElementById('roleFilter').value;
+
+  let filtered = allContacts.filter(c => {
+    const fullName = `${c.first_name} ${c.last_name}`.toLowerCase();
+    const matchQ = !q || fullName.includes(q) || (c.email||'').toLowerCase().includes(q) || (c.phone||'').includes(q);
+    const matchS = !status || c.status === status;
+    const matchR = !role   || c.roles.includes(role);
+    return matchQ && matchS && matchR;
+  });
+
+  document.getElementById('countBadge').textContent = `${filtered.length} contact${filtered.length !== 1 ? 's' : ''}`;
+  renderList(filtered);
+}
+
+function renderList(contacts) {
+  const el = document.getElementById('contactList');
+  if (!contacts.length) {
+    el.innerHTML = '<div class="empty-state"><div class="icon">◌</div><p>No contacts match your filters.</p></div>';
+    return;
+  }
+  el.innerHTML = contacts.map(c => `
+    <div class="contact-item ${c.id === selectedId ? 'active' : ''}" onclick="selectContact(${c.id})">
+      <div class="contact-item-top">
+        <div class="contact-name">${esc(c.first_name)} ${esc(c.last_name)}</div>
+        <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+          <span class="status-badge status-${c.status}">${STATUS_LABELS[c.status] || c.status}</span>
+          <span class="contact-date">${fmtDate(c.created_at)}</span>
+        </div>
+      </div>
+      <div class="contact-meta">${esc(c.email)}${c.phone ? ' · ' + esc(c.phone) : ''}</div>
+      <div class="contact-tags">
+        ${c.roles.map(r => `<span class="role-badge ${ROLE_CLASS[r] || ''}">${ROLE_LABELS[r] || r}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectContact(id) {
+  selectedId = id;
+  // Re-render list to show active state
+  filterContacts();
+  const c = allContacts.find(x => x.id === id);
+  if (!c) return;
+  renderDetail(c);
+}
+
+function renderDetail(c) {
+  const panel = document.getElementById('detailPanel');
+
+  const infoRow = (key, val, full) => val ? `
+    <div class="info-row ${full ? 'info-val full' : ''}">
+      <div class="info-key">${key}</div>
+      <div class="info-val">${esc(String(val))}</div>
+    </div>` : '';
+
+  const hasParent  = c.roles.some(r => r === 'parent_guardian');
+  const hasStudent = c.roles.some(r => r.includes('student'));
+  const hasMentor  = c.roles.some(r => r.includes('mentor'));
+  const hasDonor   = c.roles.includes('donor_investor');
+
+  panel.innerHTML = `
+    <div class="detail-header">
+      <div>
+        <div class="detail-name">${esc(c.first_name)} ${esc(c.last_name)}</div>
+        ${c.preferred_name ? `<div class="detail-preferred">Goes by: ${esc(c.preferred_name)}</div>` : ''}
+        <div class="detail-roles">
+          ${c.roles.map(r => `<span class="role-badge ${ROLE_CLASS[r] || ''}">${ROLE_LABELS[r] || r}</span>`).join('')}
+        </div>
+      </div>
+      <div class="detail-date">
+        Submitted<br>${fmtDateLong(c.created_at)}
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="section">
+      <div class="section-label">Contact Information</div>
+      <div class="info-block">
+        <div class="info-grid">
+          ${infoRow('Email', c.email)}
+          ${infoRow('Phone', c.phone)}
+          ${infoRow('Date of Birth', c.date_of_birth)}
+          ${infoRow('Address', [c.address, c.city, c.state, c.zip].filter(Boolean).join(', '), true)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Parent Info -->
+    ${hasParent && (c.student_name || c.student_grade || c.student_school) ? `
+    <div class="section">
+      <div class="section-label">Student Information</div>
+      <div class="info-block"><div class="info-grid">
+        ${infoRow("Student's Name", c.student_name)}
+        ${infoRow('Grade Level', c.student_grade)}
+        ${infoRow('School', c.student_school, true)}
+      </div></div>
+    </div>` : ''}
+
+    <!-- Student's Parent Info -->
+    ${hasStudent && (c.parent_contact_name || c.parent_contact_phone) ? `
+    <div class="section">
+      <div class="section-label">Parent / Guardian</div>
+      <div class="info-block"><div class="info-grid">
+        ${infoRow('Parent Name', c.parent_contact_name)}
+        ${infoRow('Parent Phone', c.parent_contact_phone)}
+      </div></div>
+    </div>` : ''}
+
+    <!-- Mentor Info -->
+    ${hasMentor && (c.occupation || c.church || c.mentor_experience || c.availability) ? `
+    <div class="section">
+      <div class="section-label">Mentor Information</div>
+      <div class="info-block"><div class="info-grid">
+        ${infoRow('Occupation', c.occupation)}
+        ${infoRow('Church', c.church)}
+        ${infoRow('Availability', c.availability)}
+        ${infoRow('BG Check Consent', c.background_check_consent ? '✓ Yes' : 'Not yet')}
+        ${c.mentor_experience ? `<div class="info-row" style="grid-column:1/-1"><div class="info-key">Mentorship Experience</div><div class="info-val">${esc(c.mentor_experience)}</div></div>` : ''}
+      </div></div>
+    </div>` : ''}
+
+    <!-- Donor Info -->
+    ${hasDonor && (c.organization || c.giving_interest) ? `
+    <div class="section">
+      <div class="section-label">Donor / Investor Information</div>
+      <div class="info-block"><div class="info-grid">
+        ${infoRow('Organization', c.organization)}
+        ${infoRow('Giving Interest', c.giving_interest)}
+      </div></div>
+    </div>` : ''}
+
+    <!-- How Heard & Message -->
+    ${c.how_heard || c.message ? `
+    <div class="section">
+      <div class="section-label">Additional Info</div>
+      <div class="info-block"><div class="info-grid">
+        ${infoRow('How They Heard', c.how_heard)}
+        ${c.message ? `<div class="info-row" style="grid-column:1/-1"><div class="info-key">Message</div><div class="info-val">${esc(c.message)}</div></div>` : ''}
+      </div></div>
+    </div>` : ''}
+
+    <div class="divider"></div>
+
+    <!-- CRM Controls -->
+    <div class="crm-section">
+      <h4>CRM Status</h4>
+      <select class="status-select" id="statusSelect" onchange="saveStatus(${c.id})">
+        <option value="new"       ${c.status==='new'       ?'selected':''}>● New</option>
+        <option value="reviewed"  ${c.status==='reviewed'  ?'selected':''}>● Reviewed</option>
+        <option value="contacted" ${c.status==='contacted' ?'selected':''}>● Contacted</option>
+        <option value="active"    ${c.status==='active'    ?'selected':''}>● Active</option>
+        <option value="inactive"  ${c.status==='inactive'  ?'selected':''}>● Inactive</option>
+      </select>
+    </div>
+
+    <div class="crm-section">
+      <h4>Notes</h4>
+      <textarea class="notes-textarea" id="notesArea" placeholder="Add internal notes about this contact...">${esc(c.notes || '')}</textarea>
+      <div class="btn-row">
+        <button class="btn btn-bronze btn-sm" onclick="saveNotes(${c.id})">Save Notes</button>
+        <span class="save-msg" id="saveMsg">Saved ✓</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="btn btn-danger btn-sm" onclick="deleteContact(${c.id}, '${esc(c.first_name)} ${esc(c.last_name)}')">
+      Delete Contact
+    </button>
+  `;
+}
+
+async function saveStatus(id) {
+  const status = document.getElementById('statusSelect').value;
+  await fetch(`/api/contacts/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status })
+  });
+  const c = allContacts.find(x => x.id === id);
+  if (c) { c.status = status; updateStats(); filterContacts(); }
+}
+
+async function saveNotes(id) {
+  const notes = document.getElementById('notesArea').value;
+  await fetch(`/api/contacts/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ notes })
+  });
+  const c = allContacts.find(x => x.id === id);
+  if (c) c.notes = notes;
+  const msg = document.getElementById('saveMsg');
+  if (msg) { msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 2000); }
+}
+
+async function deleteContact(id, name) {
+  if (!confirm(`Delete ${name}? This cannot be undone.`)) return;
+  await fetch(`/api/contacts/${id}`, { method: 'DELETE' });
+  allContacts = allContacts.filter(c => c.id !== id);
+  selectedId = null;
+  updateStats();
+  filterContacts();
+  document.getElementById('detailPanel').innerHTML = '<div class="no-selection"><div class="icon">✦</div><p>Contact deleted.</p></div>';
+}
+
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtDate(dt) {
+  if (!dt) return '';
+  const d = new Date(dt);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function fmtDateLong(dt) {
+  if (!dt) return '';
+  const d = new Date(dt);
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+// Init
+loadContacts();
+</script>
+</body>
+</html>

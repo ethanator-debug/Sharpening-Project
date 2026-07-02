@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Monthly Hangout Flyer Template (Blank)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --blank: #cbbfa6;
+  }
+  body { font-family: 'Lato', sans-serif; background: #e8e0d4; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+
+  .flyer {
+    background: var(--cream);
+    width: 100%;
+    max-width: 640px;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.25);
+    overflow: hidden;
+  }
+
+  .flyer-top {
+    background: var(--black);
+    padding: 44px 40px 36px;
+    text-align: center;
+    position: relative;
+  }
+  .flyer-top::after { content: ''; display: block; height: 4px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .flyer-org { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 6px; color: var(--bronze); margin-bottom: 8px; }
+  .flyer-title { font-family: 'Bebas Neue', sans-serif; font-size: 54px; letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 8px; }
+  .flyer-sub { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.35); text-transform: uppercase; }
+
+  .template-badge {
+    background: var(--bronze);
+    color: var(--black);
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px;
+  }
+
+  .flyer-body { padding: 32px 40px; }
+
+  .greeting { font-size: 15px; line-height: 1.8; color: var(--text); margin-bottom: 28px; }
+
+  .detail-block {
+    background: var(--white);
+    border: 1px solid #d4c8b4;
+    margin-bottom: 28px;
+  }
+  .detail-head { background: var(--black); color: var(--bronze); font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px; padding: 10px 20px; }
+  .detail-row { display: grid; grid-template-columns: 130px 1fr; border-bottom: 1px solid #e8e0d4; }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-key { background: #f5f0e8; padding: 11px 14px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--bronze); border-right: 1px solid #e8e0d4; display: flex; align-items: center; }
+  .detail-val { padding: 11px 14px; font-size: 13px; color: var(--blank); display: flex; align-items: center; }
+  .detail-val.filled { color: var(--text); font-weight: 700; }
+  .detail-val .blank-line { border-bottom: 1px dashed var(--blank); flex: 1; height: 1px; margin-left: 8px; }
+
+  .editable-note { font-size: 10px; font-style: italic; color: var(--blank); }
+
+  .what-section { margin-bottom: 24px; }
+  .section-head { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--black); margin-bottom: 12px; }
+  .what-list { list-style: none; padding: 0; }
+  .what-list li { font-size: 13px; line-height: 1.7; padding: 5px 0 5px 18px; position: relative; color: var(--text); }
+  .what-list li::before { content: '•'; position: absolute; left: 0; color: var(--bronze); font-size: 16px; line-height: 1.3; }
+
+  .notes-box { background: #fdf6e3; border-left: 4px solid var(--bronze); padding: 14px 18px; margin-bottom: 24px; }
+  .notes-box h3 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+  .notes-box li { font-size: 13px; line-height: 1.6; padding: 3px 0 3px 14px; position: relative; color: var(--text); list-style: none; }
+  .notes-box li::before { content: '—'; position: absolute; left: 0; color: var(--bronze); }
+
+  .rsvp-block { background: var(--black); color: var(--white); padding: 22px; margin-bottom: 24px; text-align: center; }
+  .rsvp-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--bronze); margin-bottom: 10px; }
+  .rsvp-link-field { border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 8px; margin-bottom: 8px; font-size: 13px; color: rgba(255,255,255,0.3); font-style: italic; }
+
+  .closing { font-size: 14px; line-height: 1.8; color: var(--text); text-align: center; margin-bottom: 24px; }
+
+  .verse-area { border-top: 2px solid var(--bronze); padding-top: 20px; margin-bottom: 4px; }
+  .verse-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; text-align: center; }
+  .verse-field { border: 1px dashed var(--blank); padding: 12px 16px; text-align: center; font-style: italic; font-size: 14px; color: var(--blank); }
+
+  .branding-note {
+    background: #1a1208;
+    padding: 16px 24px;
+    margin: 0 -40px -4px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    text-align: center;
+  }
+  .brand-item .brand-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); opacity: 0.7; margin-bottom: 4px; }
+  .brand-item .brand-val { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  .flyer-footer { background: var(--black); text-align: center; padding: 14px; color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+  .flyer-footer span { color: var(--bronze); }
+
+  @media print { body { background: white; padding: 0; } .flyer { box-shadow: none; max-width: 100%; } }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+  <div class="flyer-top">
+    <div class="flyer-org">The Sharpening Project</div>
+    <div class="flyer-title">Monthly Hangout<br>Flyer Template</div>
+    <div class="flyer-sub">Community + Connection + Devotional</div>
+  </div>
+
+  <div class="template-badge">Editable Template — Fill in the fields below for each month</div>
+
+  <div class="flyer-body">
+
+    <p class="greeting">Hey everyone! We're excited to announce this month's Sharpening Project hangout! This is a time for everyone — mentors, students, and families — to connect, have fun, and grow together in community.</p>
+
+    <div class="detail-block">
+      <div class="detail-head">Event Details (Editable Fields)</div>
+      <div class="detail-row">
+        <div class="detail-key">Date</div>
+        <div class="detail-val">______________________________</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Time</div>
+        <div class="detail-val">______________________________</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Location</div>
+        <div class="detail-val"><span>Final location announced 24–48 hrs before event</span></div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">RSVP By</div>
+        <div class="detail-val">______________________________</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Contact</div>
+        <div class="detail-val">______________________________</div>
+      </div>
+    </div>
+
+    <div class="what-section">
+      <div class="section-head">What to Expect</div>
+      <ul class="what-list">
+        <li>Games, food, and hangout time designed to build real relationships</li>
+        <li>Mentors and students connecting in a safe, open environment</li>
+        <li>Snacks & drinks available the entire event</li>
+        <li>A short Christ-centered devotional led by a mentor, leader, or advisor (final 20 minutes)</li>
+        <li>Oversight by approved leadership per the Rules & Protocols Manual</li>
+      </ul>
+    </div>
+
+    <div class="notes-box">
+      <h3>Important Notes for Parents & Students</h3>
+      <ul>
+        <li>All students in The Sharpening Project are invited and encouraged to attend</li>
+        <li>Parents are welcome to stay, meet mentors, observe, and participate</li>
+        <li>All media/photos follow our Media Consent Policy</li>
+        <li>All activities follow our Safety & Protocol Standards</li>
+        <li>Students should bring water and dress appropriately for weather</li>
+      </ul>
+    </div>
+
+    <div class="rsvp-block">
+      <h3>RSVP (Required)</h3>
+      <div class="rsvp-link-field">RSVP Link: _______________________________________________</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.35);">RSVPs sent at the beginning of each month; weekly reminders continue until all responses are received.</div>
+    </div>
+
+    <p class="closing">We look forward to an incredible time together — building community, deepening friendships, and encouraging one another to walk boldly in faith. Your presence matters, and we can't wait to see you there.<br><br><strong>— The Sharpening Project Leadership Team</strong></p>
+
+    <div class="verse-area">
+      <div class="verse-label">Monthly Focus Verse (Editable)</div>
+      <div class="verse-field">"________________________________________ "<br><small style="font-size:11px;color:var(--blank);margin-top:6px;display:block;">Update each month with the verse or theme of your choice.</small></div>
+    </div>
+
+    <div class="branding-note">
+      <div class="brand-item"><div class="brand-label">Logo</div><div class="brand-val">Top-right, minimal, black</div></div>
+      <div class="brand-item"><div class="brand-label">Footer</div><div class="brand-val">Bronze line + small watermark</div></div>
+      <div class="brand-item"><div class="brand-label">Fonts</div><div class="brand-val">Bebas Neue (headings) + Lato (body)</div></div>
+      <div class="brand-item"><div class="brand-label">Tone</div><div class="brand-val">Clean, professional, Christ-centered</div></div>
+    </div>
+
+  </div>
+
+  <div class="flyer-footer">
+    <span>The Sharpening Project</span> &nbsp;|&nbsp; Monthly Hangout Flyer Template
+  </div>
+</div>
+
+</body>
+</html>

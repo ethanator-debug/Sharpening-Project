@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Monthly Hangout Flyer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #1a1a1a;
+  }
+  body { font-family: 'Lato', sans-serif; background: #e8e0d4; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+
+  .flyer {
+    background: var(--cream);
+    width: 100%;
+    max-width: 640px;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .flyer-top {
+    background: var(--black);
+    padding: 48px 40px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .flyer-top::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+  }
+  .flyer-org { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 6px; color: var(--bronze); margin-bottom: 10px; }
+  .flyer-type { font-family: 'Lato', sans-serif; font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.35); text-transform: uppercase; margin-bottom: 4px; }
+  .flyer-title { font-family: 'Bebas Neue', sans-serif; font-size: 62px; letter-spacing: 3px; color: var(--white); line-height: 1; margin-bottom: 6px; }
+  .flyer-tagline { font-size: 13px; color: rgba(255,255,255,0.5); font-style: italic; }
+
+  .flyer-body { padding: 36px 40px; }
+
+  .greeting { font-size: 15px; line-height: 1.8; color: var(--text); margin-bottom: 32px; }
+  .greeting .hey { font-weight: 700; }
+
+  .event-details {
+    background: var(--white);
+    border: 1px solid #d4c8b4;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .detail-header {
+    background: var(--black);
+    color: var(--bronze);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 10px 20px;
+  }
+  .detail-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    border-bottom: 1px solid #e8e0d4;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-key {
+    background: #f5f0e8;
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--bronze);
+    border-right: 1px solid #e8e0d4;
+    display: flex;
+    align-items: center;
+  }
+  .detail-val {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+
+  .what-section { margin-bottom: 28px; }
+  .section-head { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--black); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-head::after { content: ''; flex: 1; height: 1px; background: var(--bronze); opacity: 0.3; }
+
+  .what-list { list-style: none; padding: 0; }
+  .what-list li { font-size: 14px; line-height: 1.7; padding: 6px 0 6px 20px; position: relative; color: var(--text); }
+  .what-list li::before { content: '•'; position: absolute; left: 0; color: var(--bronze); font-size: 18px; line-height: 1.2; }
+
+  .notes-box {
+    background: #fdf6e3;
+    border: 1px solid #e8c85a;
+    border-left: 4px solid var(--bronze);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+  }
+  .notes-box h3 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+  .notes-box ul { list-style: none; padding: 0; }
+  .notes-box li { font-size: 13px; line-height: 1.6; padding: 3px 0 3px 16px; position: relative; color: var(--text); }
+  .notes-box li::before { content: '—'; position: absolute; left: 0; color: var(--bronze); }
+
+  .rsvp-block {
+    background: var(--black);
+    color: var(--white);
+    padding: 24px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .rsvp-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--bronze); margin-bottom: 10px; }
+  .rsvp-block .link { font-size: 13px; color: rgba(255,255,255,0.5); font-style: italic; margin-bottom: 8px; }
+  .rsvp-block .deadline { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+
+  .closing-msg { font-size: 14px; line-height: 1.8; color: var(--text); text-align: center; margin-bottom: 28px; }
+  .closing-msg .sig { margin-top: 10px; font-weight: 700; color: var(--black); font-size: 13px; }
+
+  .verse-block {
+    border-top: 2px solid var(--bronze);
+    padding-top: 20px;
+    text-align: center;
+  }
+  .verse { font-style: italic; font-size: 14px; color: #555; line-height: 1.7; }
+  .verse-ref { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--bronze); margin-top: 8px; }
+
+  .flyer-footer {
+    background: var(--black);
+    text-align: center;
+    padding: 14px;
+    color: rgba(255,255,255,0.3);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .flyer-footer span { color: var(--bronze); }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .flyer { box-shadow: none; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+  <div class="flyer-top">
+    <div class="flyer-org">The Sharpening Project</div>
+    <div class="flyer-type">Monthly Event</div>
+    <div class="flyer-title">Monthly<br>Hangout</div>
+    <div class="flyer-tagline">Community · Connection · Devotional</div>
+  </div>
+
+  <div class="flyer-body">
+
+    <p class="greeting"><span class="hey">Hey everyone!</span> We're excited to announce this month's Sharpening Project hangout! This is a time for everyone — mentors, students, and families — to connect, have fun, and grow together in community.</p>
+
+    <div class="event-details">
+      <div class="detail-header">Event Details</div>
+      <div class="detail-row">
+        <div class="detail-key">Date</div>
+        <div class="detail-val">Sunday, September 29th</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Time</div>
+        <div class="detail-val">2:00 – 4:00 PM</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Location</div>
+        <div class="detail-val">Pinkerton Park, Franklin</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">RSVP By</div>
+        <div class="detail-val">Friday, September 27th</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Contact</div>
+        <div class="detail-val">thesharpeningproject@gmail.com</div>
+      </div>
+    </div>
+
+    <div class="what-section">
+      <div class="section-head">What to Expect</div>
+      <ul class="what-list">
+        <li>Games, food, and time to hang out.</li>
+        <li>A short devotional and prayer.</li>
+        <li>A chance to meet your mentors and make connections.</li>
+        <li>Snacks and drinks available throughout.</li>
+      </ul>
+    </div>
+
+    <div class="notes-box">
+      <h3>Important Notes</h3>
+      <ul>
+        <li>Open to all current participants of The Sharpening Project.</li>
+        <li>Locations may change monthly — updates sent via email or text.</li>
+        <li>Please bring water and dress for the weather.</li>
+        <li>Parents are encouraged to come, meet the mentors, and hang out!</li>
+      </ul>
+    </div>
+
+    <div class="rsvp-block">
+      <h3>RSVP Required</h3>
+      <p class="link">RSVP using the form link sent to your group or email thesharpeningproject@gmail.com</p>
+      <p class="deadline">Please RSVP by Friday at 5 PM to help us plan for food and games.</p>
+    </div>
+
+    <p class="closing-msg">We can't wait to see you there and spend time together building community, faith, and friendship.
+      <div class="sig">— The Sharpening Project Team</div>
+    </p>
+
+    <div class="verse-block">
+      <p class="verse">"As iron sharpens iron, so one man sharpens another."</p>
+      <p class="verse-ref">— Proverbs 27:17</p>
+    </div>
+
+  </div>
+
+  <div class="flyer-footer">
+    <span>The Sharpening Project</span> &nbsp;|&nbsp; Monthly Hangout
+  </div>
+</div>
+
+</body>
+</html>

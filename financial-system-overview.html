@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Financial System Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --muted: #666;
+    --border: #e0d8cc;
+    --green: #2a7a4f;
+  }
+  body { font-family: 'Lato', sans-serif; background: var(--black); color: var(--text); }
+
+  header {
+    background: linear-gradient(160deg, #1a1208 0%, #0f0f0f 100%);
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '$';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 400px;
+    color: var(--bronze);
+    opacity: 0.04;
+    position: absolute;
+    top: -80px; right: -40px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  header::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--bronze); text-transform: uppercase; margin-bottom: 12px; position: relative; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 72px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 16px; position: relative; }
+  header .motto {
+    display: inline-block;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+    border-top: 1px solid rgba(201,149,42,0.3);
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 56px 32px; }
+
+  .purpose-box {
+    background: #1c1710;
+    border: 1px solid rgba(201,149,42,0.2);
+    padding: 36px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .purpose-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 4px; color: var(--bronze); margin-bottom: 16px; }
+  .purpose-box .standard { font-size: 20px; font-weight: 700; color: var(--white); line-height: 1.5; }
+  .purpose-box p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 12px; line-height: 1.7; }
+
+  .section { margin-bottom: 48px; }
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--bronze);
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(201,149,42,0.3);
+  }
+
+  .funding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .funding-card {
+    background: #1c1710;
+    border: 1px solid rgba(201,149,42,0.15);
+    border-top: 3px solid var(--bronze);
+    padding: 20px;
+  }
+  .funding-card .label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--bronze); text-transform: uppercase; margin-bottom: 8px; }
+  .funding-card h3 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .funding-card p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  .budget-cats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 2px;
+  }
+  .bcat {
+    background: #1c1710;
+    padding: 20px 16px;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .bcat:nth-child(1) { border-color: var(--bronze); }
+  .bcat:nth-child(2) { border-color: #8fa8d0; }
+  .bcat:nth-child(3) { border-color: #9ecf8f; }
+  .bcat:nth-child(4) { border-color: #d08f8f; }
+  .bcat:nth-child(5) { border-color: #c4a0d8; }
+  .bcat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: rgba(255,255,255,0.1); line-height: 1; }
+  .bcat h3 { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.4; }
+  .bcat p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  .workflow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  @media (max-width: 600px) { .workflow { grid-template-columns: 1fr 1fr; } }
+  .workflow-step {
+    background: #1c1710;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .workflow-step::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bronze);
+    font-size: 18px;
+    z-index: 1;
+  }
+  .workflow-step:last-child::after { display: none; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--bronze); opacity: 0.2; line-height: 1; }
+  .step-title { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .step-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  .ethics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .ethic {
+    background: #1c1710;
+    padding: 20px;
+    border-left: 3px solid var(--bronze);
+  }
+  .ethic h3 { font-size: 13px; font-weight: 700; color: var(--bronze); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .ethic p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  .flow-chain {
+    background: #1c1710;
+    padding: 24px 28px;
+    text-align: center;
+    border: 1px solid rgba(201,149,42,0.2);
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+  .flow-chain p {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--bronze);
+    line-height: 2;
+  }
+
+  .prohibited-list { background: rgba(200,50,50,0.06); border: 1px solid rgba(200,50,50,0.2); border-left: 4px solid #cc4444; padding: 20px 24px; }
+  .prohibited-list h3 { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #cc4444; margin-bottom: 12px; }
+  .prohibited-list ul { list-style: none; padding: 0; }
+  .prohibited-list li { font-size: 13px; color: rgba(255,100,100,0.8); padding: 4px 0 4px 20px; position: relative; }
+  .prohibited-list li::before { content: '✕'; position: absolute; left: 0; }
+
+  .closing-box {
+    background: linear-gradient(135deg, #1c1710 0%, #0f0f0f 100%);
+    border: 1px solid rgba(201,149,42,0.3);
+    padding: 40px;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .closing-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 16px; }
+  .closing-box p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 580px; margin: 0 auto 16px; }
+  .values-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+  .val-tag { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--black); background: var(--bronze); padding: 5px 12px; border-radius: 2px; }
+
+  footer { background: #0a0a0a; color: rgba(255,255,255,0.25); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Sharpening Project</div>
+  <h1>Financial System<br>Overview</h1>
+  <span class="motto">Built for Transparency, Stewardship, Scale, and Long-Term Integrity</span>
+</header>
+
+<div class="container">
+
+  <div class="purpose-box">
+    <h2>Our Standard</h2>
+    <div class="standard">"Every dollar strengthens discipleship,<br>expands mentorship, and glorifies Jesus."</div>
+    <p>This system protects the program legally, prepares for rapid growth, enables multi-church partnerships, and builds long-term financial credibility and trust.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 2</div>
+    <h2>Funding Structure — Multi-Stream Model</h2>
+    <div class="funding-grid">
+      <div class="funding-card">
+        <div class="label">Stream A</div>
+        <h3>Church Sponsorships</h3>
+        <p>Partner churches adopt the program financially. Funds released seasonally or monthly.</p>
+      </div>
+      <div class="funding-card">
+        <div class="label">Stream B</div>
+        <h3>Private Donors</h3>
+        <p>Parents, families, and supporters who give directly to the mission.</p>
+      </div>
+      <div class="funding-card">
+        <div class="label">Stream C</div>
+        <h3>Designated Gifts</h3>
+        <p>Funds given specifically for events, materials, scholarships, or supplies.</p>
+      </div>
+      <div class="funding-card">
+        <div class="label">Future Streams</div>
+        <h3>Scalable Options</h3>
+        <p>Merch / apparel, fundraising events, business partnerships, grant funding.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 3</div>
+    <h2>Budget Categories</h2>
+    <div class="budget-cats">
+      <div class="bcat">
+        <div class="bcat-num">01</div>
+        <h3>Monthly Hangouts & Events</h3>
+        <p>Snacks, drinks, rentals, equipment, devotion materials</p>
+      </div>
+      <div class="bcat">
+        <div class="bcat-num">02</div>
+        <h3>1-on-1 Mentoring</h3>
+        <p>Small snacks, inexpensive activities, basic materials</p>
+      </div>
+      <div class="bcat">
+        <div class="bcat-num">03</div>
+        <h3>Admin & Operations</h3>
+        <p>Printing, forms, software, data storage, safety materials</p>
+      </div>
+      <div class="bcat">
+        <div class="bcat-num">04</div>
+        <h3>Emergency / Contingency</h3>
+        <p>Weather relocation, urgent student needs, pastoral emergencies</p>
+      </div>
+      <div class="bcat">
+        <div class="bcat-num">05</div>
+        <h3>Long-Term Growth Fund</h3>
+        <p>Expansion, training new leaders, launching new chapters</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 4</div>
+    <h2>Financial Workflow — The Four-Step Chain</h2>
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="step-num">1</div>
+        <div class="step-title">Submit Request</div>
+        <div class="step-desc">Budget Request Form with amount, category, purpose, and date needed</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">2</div>
+        <div class="step-title">Approval</div>
+        <div class="step-desc">Program Director → Head Advisor → (Church Admin if needed)</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">3</div>
+        <div class="step-title">Purchase</div>
+        <div class="step-desc">Buy items. Save all receipts. Log relevant notes.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">4</div>
+        <div class="step-title">Upload</div>
+        <div class="step-desc">Upload receipt photo, short summary, and link if digital</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 6</div>
+    <h2>Stewardship & Ethical Standards</h2>
+    <div class="ethics-grid">
+      <div class="ethic"><h3>No Personal Use of Funds</h3><p>No spending for anything outside the mission. Period.</p></div>
+      <div class="ethic"><h3>Transparency at All Times</h3><p>If money is spent, it must be logged. No exceptions.</p></div>
+      <div class="ethic"><h3>Prayerful Decisions</h3><p>Stewardship is spiritual discipline, not just logistics.</p></div>
+      <div class="ethic"><h3>Two-Person Integrity Rule</h3><p>Every request, approval, and reimbursement must involve two leaders minimum.</p></div>
+      <div class="ethic"><h3>Documentation Required</h3><p>If it's not documented, it doesn't exist.</p></div>
+      <div class="ethic"><h3>No Verbal Approvals</h3><p>Everything must be written, logged, and approved in the system.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 7</div>
+    <h2>Financial Communication Flow</h2>
+    <div class="flow-chain">
+      <p>Mentors → Mentor Coordinator → Program Director → Head Advisor → Sponsor / Partner Church</p>
+    </div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.45);text-align:center;line-height:1.7;">Nothing is lost. Decisions are accountable. The church always stays informed. Growth scales to multi-site.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 8</div>
+    <h2>Safeguards & Prohibited Practices</h2>
+    <div class="ethics-grid" style="margin-bottom:20px;">
+      <div class="ethic"><h3>Spending Caps</h3><p>Maximum spend limits for mentors, coordinators, and directors. Amounts over $1,000 require additional approval.</p></div>
+      <div class="ethic"><h3>Monthly Financial Reports</h3><p>Program Director sends a summary to Head Advisor and sponsor church each month.</p></div>
+      <div class="ethic"><h3>Annual Financial Review</h3><p>Audit the dashboard, review receipts, evaluate spending patterns at year-end.</p></div>
+    </div>
+    <div class="prohibited-list">
+      <h3>Prohibited Practices</h3>
+      <ul>
+        <li>Cash handouts to students</li>
+        <li>Unapproved reimbursements</li>
+        <li>Storing funds privately</li>
+        <li>Venmo/CashApp transfers without documentation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="closing-box">
+    <h2>Stewardship is Worship</h2>
+    <p>Every dollar entrusted to The Sharpening Project is a seed of faith placed into the spiritual formation of young men. We commit to stewarding every resource with excellence, integrity, transparency, accountability, prayer, and honor.</p>
+    <p style="font-size:13px;color:rgba(255,255,255,0.35);">Because stewardship is worship — and every financial decision must glorify God.</p>
+    <div class="values-row">
+      <span class="val-tag">Excellence</span>
+      <span class="val-tag">Integrity</span>
+      <span class="val-tag">Transparency</span>
+      <span class="val-tag">Accountability</span>
+      <span class="val-tag">Prayer</span>
+      <span class="val-tag">Honor</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Financial System Overview
+</footer>
+
+</body>
+</html>

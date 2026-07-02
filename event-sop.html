@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Event SOPs & Scheduling</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --muted: #666;
+    --border: #e0d8cc;
+  }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); }
+
+  header {
+    background: var(--black);
+    padding: 56px 40px 48px;
+    text-align: center;
+    position: relative;
+  }
+  header::after { content: ''; display: block; height: 4px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--bronze); text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 68px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  header .sub { font-size: 14px; color: rgba(255,255,255,0.45); font-style: italic; }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 56px 32px; }
+
+  .sop-block {
+    background: var(--white);
+    margin-bottom: 32px;
+    border-radius: 2px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .sop-header {
+    background: var(--black);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .sop-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--bronze);
+    opacity: 0.5;
+    line-height: 1;
+    min-width: 40px;
+  }
+  .sop-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .sop-body { padding: 28px; }
+
+  .purpose {
+    background: var(--cream);
+    border-left: 3px solid var(--bronze);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  .col-block h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  ul.sop-list { list-style: none; padding: 0; }
+  ul.sop-list li {
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 6px 0 6px 18px;
+    position: relative;
+    border-bottom: 1px solid var(--cream);
+    color: var(--text);
+  }
+  ul.sop-list li:last-child { border-bottom: none; }
+  ul.sop-list li::before { content: '•'; position: absolute; left: 0; color: var(--bronze); font-size: 16px; line-height: 1.3; }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    margin-top: 8px;
+  }
+  .timeline-time {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--bronze);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .timeline-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 12px 0 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    border-left: 2px solid var(--border);
+  }
+  .timeline-time:last-of-type, .timeline-desc:last-of-type { border-bottom: none; }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .role-card {
+    background: var(--cream);
+    padding: 14px;
+    border-top: 3px solid var(--bronze);
+  }
+  .role-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .role-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .divider {
+    text-align: center;
+    color: var(--bronze);
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin: 12px 0;
+    opacity: 0.4;
+  }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    padding: 8px 12px;
+    background: var(--cream);
+    border-radius: 2px;
+  }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--bronze);
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+  footer { background: var(--black); color: rgba(255,255,255,0.3); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Sharpening Project</div>
+  <h1>Event SOPs &<br>Scheduling Guide</h1>
+  <p class="sub">Standard Operating Procedures for All Program Events</p>
+</header>
+
+<div class="container">
+
+  <!-- SOP 1: Kickoff -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">1</div>
+      <h2>Kickoff Event SOP</h2>
+    </div>
+    <div class="sop-body">
+      <div class="purpose">To introduce students, parents, and mentors to The Sharpening Project, establish relational warmth, set expectations, and cast vision for the program year.</div>
+      <div class="two-col">
+        <div class="col-block">
+          <h3>Schedule</h3>
+          <ul class="sop-list">
+            <li>Leadership arrival — 30 min early</li>
+            <li>Greeting & check-in (10–15 min)</li>
+            <li>Hangout with games, snacks & connection</li>
+            <li>Welcome message</li>
+            <li>Program explanation (Why, Goals, Expectations)</li>
+            <li>Mentor introductions</li>
+            <li>Closing prayer</li>
+            <li>Cleanup</li>
+          </ul>
+        </div>
+        <div class="col-block">
+          <h3>Required Items</h3>
+          <ul class="sop-list">
+            <li>Snacks & drinks</li>
+            <li>Outdoor games (Football, Frisbee, Spikeball, Cornhole)</li>
+            <li>Tables for check-in</li>
+            <li>Printed waivers & info sheets</li>
+            <li>Trash bags</li>
+            <li>Portable speaker</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-block" style="margin-top:24px;">
+        <h3>Leadership Roles</h3>
+        <div class="roles-grid">
+          <div class="role-card">
+            <div class="role-title">Program Director</div>
+            <div class="role-desc">Leads communication & flow</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Mentor Coordinator</div>
+            <div class="role-desc">Manages mentor introductions & logistics</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Media / Liaison</div>
+            <div class="role-desc">Communication with families</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Head Advisor</div>
+            <div class="role-desc">Spiritual covering & guidance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOP 2: Weekly 1-on-1 -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">2</div>
+      <h2>Weekly 1-on-1 Meeting SOP</h2>
+    </div>
+    <div class="sop-body">
+      <div class="purpose">To build consistent, intentional discipleship between mentor and student in weekly sessions.</div>
+      <div class="two-col">
+        <div class="col-block">
+          <h3>Meeting Structure</h3>
+          <ul class="sop-list">
+            <li>Minimum 2 hours</li>
+            <li>Meet in public or parent-approved locations</li>
+            <li>Use program Bible study material</li>
+            <li>Prayer, accountability, and encouragement</li>
+            <li>Communicate with Mentor Coordinator weekly</li>
+          </ul>
+        </div>
+        <div class="col-block">
+          <h3>Safety Requirements</h3>
+          <ul class="sop-list">
+            <li>Parents must know meeting location & time</li>
+            <li>Meetings must be public or explicitly parent-approved</li>
+            <li>Students must have active communication access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOP 3: Monthly Hangout -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">3</div>
+      <h2>Monthly Large-Group Meeting SOP</h2>
+    </div>
+    <div class="sop-body">
+      <div class="purpose">To build community, allow natural mentor–student bonding, evaluate leadership health, and provide a Christ-centered devotional.</div>
+      <h3 style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">Event Timeline</h3>
+      <div class="timeline">
+        <div class="timeline-time">00:00</div>
+        <div class="timeline-desc"><strong>Hangout & Fellowship</strong> — Games, snacks, conversation, natural bonding</div>
+        <div class="timeline-time">1:40</div>
+        <div class="timeline-desc"><strong>Leadership Evaluation</strong> — Quiet observational evaluation; no interruptions</div>
+        <div class="timeline-time">1:50</div>
+        <div class="timeline-desc"><strong>Devotional</strong> — Short teaching, prayer, announcements</div>
+        <div class="timeline-time">2:10</div>
+        <div class="timeline-desc"><strong>Wrap Up</strong> — Close out, cleanup, final conversations</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOP 4: Preparation Checklist -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">4</div>
+      <h2>Event Preparation Checklist</h2>
+    </div>
+    <div class="sop-body">
+      <div class="checklist-grid">
+        <div class="check-item"><div class="check-box"></div>Reserve location or confirm park availability</div>
+        <div class="check-item"><div class="check-box"></div>Confirm backup plan for weather</div>
+        <div class="check-item"><div class="check-box"></div>Prepare group message announcement</div>
+        <div class="check-item"><div class="check-box"></div>Send RSVP at beginning of month</div>
+        <div class="check-item"><div class="check-box"></div>Prepare snacks & drinks</div>
+        <div class="check-item"><div class="check-box"></div>Bring game equipment</div>
+        <div class="check-item"><div class="check-box"></div>Leadership arrives 30 minutes early</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOP 5: Communication -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">5</div>
+      <h2>Communication Protocols</h2>
+    </div>
+    <div class="sop-body">
+      <ul class="sop-list">
+        <li>Monthly RSVP sent at beginning of each month</li>
+        <li>Weekly reminders until all respond</li>
+        <li>Weather updates sent 3+ hours before event</li>
+        <li>Media/Liaison Coordinator handles all messaging</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SOP 6: Safety -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">6</div>
+      <h2>Safety & Environment Protocols</h2>
+    </div>
+    <div class="sop-body">
+      <ul class="sop-list">
+        <li>No private indoor meetings</li>
+        <li>All meetings must be public or parent-approved</li>
+        <li>Parents must know meeting time & location</li>
+        <li>Emergency info available during events</li>
+        <li>Photos only taken with parental consent</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SOP 7: Supply List -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">7</div>
+      <h2>Supply Lists</h2>
+    </div>
+    <div class="sop-body">
+      <div class="checklist-grid">
+        <div class="check-item"><div class="check-box"></div>Football</div>
+        <div class="check-item"><div class="check-box"></div>Frisbee</div>
+        <div class="check-item"><div class="check-box"></div>Spikeball</div>
+        <div class="check-item"><div class="check-box"></div>Cornhole</div>
+        <div class="check-item"><div class="check-box"></div>Soccer Ball</div>
+        <div class="check-item"><div class="check-box"></div>Snacks for entire group</div>
+        <div class="check-item"><div class="check-box"></div>Water bottles</div>
+        <div class="check-item"><div class="check-box"></div>Trash bags & napkins</div>
+        <div class="check-item"><div class="check-box"></div>Portable speaker</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOP 8: Leadership Roles -->
+  <div class="sop-block">
+    <div class="sop-header">
+      <div class="sop-num">8</div>
+      <h2>Leadership Roles During Events</h2>
+    </div>
+    <div class="sop-body">
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-title">Program Director</div>
+          <div class="role-desc">Oversees event flow & leadership</div>
+        </div>
+        <div class="role-card">
+          <div class="role-title">Mentor Coordinator</div>
+          <div class="role-desc">Tracks mentors & weekly updates</div>
+        </div>
+        <div class="role-card">
+          <div class="role-title">Media / Liaison</div>
+          <div class="role-desc">Handles communication & RSVPs</div>
+        </div>
+        <div class="role-card">
+          <div class="role-title">Head Advisor</div>
+          <div class="role-desc">Spiritual covering & guidance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Event SOPs & Scheduling Guide
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Christ-Centered Mentorship for Young Men</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #1a1a1a;
+  }
+  body { font-family: 'Lato', sans-serif; background: #1a1208; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+
+  .flyer {
+    background: var(--black);
+    color: var(--white);
+    width: 100%;
+    max-width: 660px;
+    box-shadow: 0 16px 80px rgba(0,0,0,0.7);
+    overflow: hidden;
+  }
+
+  .flyer-hero {
+    padding: 64px 48px 52px;
+    text-align: center;
+    border-bottom: 3px solid rgba(201,149,42,0.25);
+    position: relative;
+  }
+  .org { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 6px; color: var(--bronze); margin-bottom: 16px; }
+  .main-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 9vw, 80px); letter-spacing: 3px; color: var(--white); line-height: 0.95; margin-bottom: 20px; }
+  .sub { font-size: 14px; color: rgba(255,255,255,0.5); font-style: italic; }
+  .bronze-bar { width: 60px; height: 3px; background: var(--bronze); margin: 20px auto 0; }
+
+  .what-section {
+    padding: 40px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+  .what-section p { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 0; }
+
+  .how-section {
+    padding: 40px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  @media (max-width: 480px) { .how-grid { grid-template-columns: 1fr; } }
+
+  .how-item { padding: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(201,149,42,0.1); border-top: 3px solid var(--bronze); }
+  .how-item h3 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .how-item p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  .trust-section {
+    padding: 32px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .trust-points { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  @media (max-width: 480px) { .trust-points { grid-template-columns: 1fr; } }
+  .trust-point { display: flex; align-items: flex-start; gap: 10px; }
+  .check-icon { color: var(--bronze); font-weight: 900; font-size: 14px; margin-top: 2px; flex-shrink: 0; }
+  .trust-point span { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+  .cta-section {
+    padding: 40px 48px;
+    text-align: center;
+    background: rgba(201,149,42,0.05);
+    border-top: 1px solid rgba(201,149,42,0.15);
+  }
+  .cta-h { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 10px; }
+  .cta-p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+  .cta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 480px) { .cta-grid { grid-template-columns: 1fr; } }
+  .cta-item .cta-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
+  .cta-item .cta-val { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .scripture-footer {
+    background: var(--bronze);
+    padding: 20px 32px;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+    color: var(--black);
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <div class="flyer-hero">
+    <div class="org">The Sharpening Project</div>
+    <div class="main-headline">Christ-Centered<br>Mentorship<br>for Young Men</div>
+    <div class="sub">Building faith, strength, and purpose — one student at a time.</div>
+    <div class="bronze-bar"></div>
+  </div>
+
+  <div class="what-section">
+    <div class="section-label">What We Are</div>
+    <p>The Sharpening Project is a Christ-centered mentorship program where older high school mentors meet weekly with younger students to build faith, confidence, and character through intentional, safe, one-on-one relationships.<br><br><strong>No student should walk through life alone. We make sure they never have to.</strong></p>
+  </div>
+
+  <div class="how-section">
+    <div class="section-label">How It Works</div>
+    <div class="how-grid">
+      <div class="how-item">
+        <h3>Weekly One-on-One Mentoring</h3>
+        <p>2+ hour meetings. Public or parent-approved locations. Prayer, conversation, encouragement, real-life guidance.</p>
+      </div>
+      <div class="how-item">
+        <h3>Monthly Community Hangouts</h3>
+        <p>Games, food, friendship, and fun. Parent-friendly events. Short devotional & group encouragement.</p>
+      </div>
+      <div class="how-item">
+        <h3>Vetted & Trained Mentors</h3>
+        <p>Interviewed, trained, and supervised by adult leaders. Supported through weekly check-ins.</p>
+      </div>
+      <div class="how-item">
+        <h3>Full Safety Protocols</h3>
+        <p>Your son is always protected, supported, and cared for under our official Rules & Protocols.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust-section">
+    <div class="section-label">Why Parents Choose Us</div>
+    <div class="trust-points">
+      <div class="trust-point"><span class="check-icon">✓</span><span>Safe, structured, Christ-centered mentorship</span></div>
+      <div class="trust-point"><span class="check-icon">✓</span><span>A trusted older role model</span></div>
+      <div class="trust-point"><span class="check-icon">✓</span><span>Emotional and spiritual support</span></div>
+      <div class="trust-point"><span class="check-icon">✓</span><span>Community, confidence, and belonging</span></div>
+      <div class="trust-point"><span class="check-icon">✓</span><span>Guidance through real struggles and life transitions</span></div>
+      <div class="trust-point"><span class="check-icon">✓</span><span>A brotherhood of faith and growth</span></div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-h">Want Your Son to Join?</div>
+    <p class="cta-p">We would love to connect with you.</p>
+    <div class="cta-grid">
+      <div class="cta-item">
+        <div class="cta-label">Email</div>
+        <div class="cta-val">[Insert Email]</div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-label">Learn More</div>
+        <div class="cta-val">[Insert Website]</div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-label">Next Hangout</div>
+        <div class="cta-val">[Insert Date/Location]</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scripture-footer">
+    "As iron sharpens iron, so one man sharpens another." — Proverbs 27:17
+  </div>
+
+</div>
+
+</body>
+</html>

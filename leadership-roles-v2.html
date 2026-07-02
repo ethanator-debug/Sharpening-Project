@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Leadership Roles & Accountability (Hybrid Movement Structure)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --muted: #666;
+    --border: #e0d8cc;
+  }
+  body { font-family: 'Lato', sans-serif; background: #1a1208; color: var(--text); }
+
+  header { background: var(--black); padding: 56px 40px 48px; text-align: center; position: relative; }
+  header::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--bronze); text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 5vw, 62px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  header .sub { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .prayer-block {
+    background: #100e08;
+    color: rgba(255,255,255,0.6);
+    padding: 36px 48px;
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 2;
+    border-bottom: 1px solid rgba(201,149,42,0.15);
+  }
+  .prayer-block .label { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--bronze); margin-bottom: 14px; font-style: normal; }
+  .prayer-block .amen { font-style: normal; font-weight: 900; color: var(--bronze); margin-top: 10px; font-size: 18px; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 56px 32px; }
+
+  .tier-section { margin-bottom: 48px; }
+  .tier-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--bronze);
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }
+  .tier-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(201,149,42,0.25);
+  }
+
+  .backbone {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+  .bb-cell {
+    background: #1c1710;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .bb-arrow { font-size: 24px; color: var(--bronze); display: flex; align-items: center; justify-content: center; background: #1a1208; padding: 8px; }
+  .bb-cell .role { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--bronze); margin-bottom: 6px; }
+  .bb-cell .desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+  .role-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .role-item {
+    background: #1c1710;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    overflow: hidden;
+    border: 1px solid rgba(201,149,42,0.1);
+  }
+  @media (max-width: 600px) { .role-item { grid-template-columns: 1fr; } }
+
+  .role-left {
+    background: #100e08;
+    padding: 24px 20px;
+    border-right: 1px solid rgba(201,149,42,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .role-name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; color: var(--white); line-height: 1.2; }
+  .role-summary { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  .role-right { padding: 20px 24px; }
+
+  .meta-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  .meta-item .meta-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); opacity: 0.7; margin-bottom: 3px; }
+  .meta-item .meta-val { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+  .resp-head { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+  .resp-list { list-style: none; padding: 0; }
+  .resp-list li { font-size: 12px; line-height: 1.5; padding: 4px 0 4px 16px; position: relative; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .resp-list li:last-child { border-bottom: none; }
+  .resp-list li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+
+  .web-table-wrap { margin-bottom: 48px; overflow-x: auto; }
+  .web-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1c1710;
+  }
+  .web-table th { background: #100e08; color: var(--bronze); font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 2px; padding: 12px 14px; text-align: left; border-bottom: 2px solid rgba(201,149,42,0.25); }
+  .web-table td { font-size: 12px; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.65); }
+  .web-table tr:last-child td { border-bottom: none; }
+
+  footer { background: #0a0a0a; color: rgba(255,255,255,0.25); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Sharpening Project</div>
+  <h1>Leadership Roles &<br>Accountability Guide</h1>
+  <p class="sub">Hybrid Movement Structure — All Roles, Expanded</p>
+</header>
+
+<div class="prayer-block">
+  <div class="label">Prayer Over Leadership</div>
+  I pray for wisdom over each leader in this program.<br>
+  I pray that God fills them with peace in hard times and confidence to do the right thing even when it is difficult.<br>
+  Lord, speak clearly to those assigning leadership roles and equip each chosen leader to rise to the occasion.<br>
+  I pray that each of these men walk hand in hand with You, Lord, and that You fill them with Your love till it overflows into the lives of those around them.<br>
+  Thank You, Lord, for each one of these guys. I pray blessings over them, Lord.
+  <div class="amen">All of this I pray in Jesus' name, AMEN!!!</div>
+</div>
+
+<div class="container">
+
+  <!-- Movement Backbone -->
+  <div class="tier-section">
+    <div class="tier-label">Program Structure</div>
+    <div class="tier-title">Movement Backbone</div>
+    <div class="backbone">
+      <div class="bb-cell"><div class="role">Program Director</div><div class="desc">Vision, operations, alignment</div></div>
+      <div class="bb-arrow">↓</div>
+      <div class="bb-cell"><div class="role">Head Advisor</div><div class="desc">Spiritual covering, pastoral oversight</div></div>
+      <div class="bb-arrow">↓</div>
+      <div class="bb-cell"><div class="role">Core Leadership</div><div class="desc">Coordinator roles; carry operations</div></div>
+      <div class="bb-arrow">↓</div>
+      <div class="bb-cell"><div class="role">Support Leadership</div><div class="desc">Specialized roles; stabilize system</div></div>
+      <div class="bb-arrow">↓</div>
+      <div class="bb-cell"><div class="role">Mentors</div><div class="desc">One-on-one discipleship</div></div>
+      <div class="bb-arrow">↓</div>
+      <div class="bb-cell"><div class="role">Students</div><div class="desc">Mission field & future mentors</div></div>
+    </div>
+  </div>
+
+  <!-- Core Leadership -->
+  <div class="tier-section">
+    <div class="tier-label">Tier 1</div>
+    <div class="tier-title">Core Leadership Roles</div>
+    <div class="role-list">
+
+      <div class="role-item">
+        <div class="role-left">
+          <div class="role-name">Program Director</div>
+          <div class="role-summary">Oversees the entire program — operations, direction, structure, culture.</div>
+        </div>
+        <div class="role-right">
+          <div class="meta-row">
+            <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Head Advisor</div></div>
+            <div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Media & Liaison</div></div>
+            <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+          </div>
+          <div class="resp-head">Responsibilities</div>
+          <ul class="resp-list">
+            <li>Lead yearly vision & direction; manage all leadership teams</li>
+            <li>Approve systems, pairings, events; oversee accountability web</li>
+            <li>Lead monthly leadership debrief; report major updates to Head Advisor</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left">
+          <div class="role-name">Head Advisor</div>
+          <div class="role-summary">Pastoral / ministry overseer ensuring Biblical integrity and spiritual safety.</div>
+        </div>
+        <div class="role-right">
+          <div class="meta-row">
+            <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div>
+            <div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">None</div></div>
+            <div class="meta-item"><div class="meta-label">Mentors</div><div class="meta-val">All Leaders</div></div>
+          </div>
+          <div class="resp-head">Responsibilities</div>
+          <ul class="resp-list">
+            <li>Provide spiritual covering; mentor all leaders</li>
+            <li>Assist high-level decisions; handle conflict, crisis, theology</li>
+            <li>Attend leadership meetings quarterly</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Core Operations -->
+  <div class="tier-section">
+    <div class="tier-label">Tier 2 — Daily Engine</div>
+    <div class="tier-title">Core Operations Coordinators</div>
+    <div class="role-list">
+
+      <div class="role-item">
+        <div class="role-left">
+          <div class="role-name">Lead Mentor Coordinator</div>
+          <div class="role-summary">Leads the entire mentor force.</div>
+        </div>
+        <div class="role-right">
+          <div class="meta-row">
+            <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div>
+            <div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Program Director</div></div>
+            <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+          </div>
+          <div class="resp-head">Responsibilities</div>
+          <ul class="resp-list">
+            <li>Manage mentor assignments; weekly check-ins; track meetings</li>
+            <li>Monitor health of relationships; report issues to Director & Advisor</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left">
+          <div class="role-name">Media & Liaison Coordinator</div>
+          <div class="role-summary">Communication, branding, parent relations, public voice.</div>
+        </div>
+        <div class="role-right">
+          <div class="meta-row">
+            <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div>
+            <div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Program Director</div></div>
+            <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+          </div>
+          <div class="resp-head">Responsibilities</div>
+          <ul class="resp-list">
+            <li>Parent announcements; monthly RSVPs; flyers + forms</li>
+            <li>Communication systems; media consent compliance</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Support Leadership -->
+  <div class="tier-section">
+    <div class="tier-label">Tier 3 — Scaling Infrastructure</div>
+    <div class="tier-title">Support Leadership Roles</div>
+    <div class="role-list">
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Safety & Compliance Officer</div><div class="role-summary">Ensures all safety, reporting, and legal standards are followed.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Head Advisor</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Expansion Officer</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Oversee Rules & Protocols Manual; manage incident reports</li><li>Review mentor conduct; interface with parents during crises</li><li>Update safety policies annually</li></ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Training & Development Director</div><div class="role-summary">Builds the training system for mentors and new chapters.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Mentor Coordinator</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Create training modules; run kickoff training</li><li>Lead quarterly leadership workshops; train new chapter leaders</li></ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Expansion & Chapter Replication Officer</div><div class="role-summary">Designs replicable systems for future campus/city chapters.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Safety Officer</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Build the "Sharpening Project Playbook"; oversee new chapter onboarding</li><li>Maintain brand consistency; provide coaching to new leaders</li></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Admin & Logistics -->
+  <div class="tier-section">
+    <div class="tier-label">Tier 4 — Admin & Logistics</div>
+    <div class="tier-title">Admin, Finance & Event Roles</div>
+    <div class="role-list">
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Administrative Coordinator</div><div class="role-summary">Supports leadership through organization and documentation.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Media Coordinator</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Maintain records; track forms; oversee scheduling systems</li><li>Archive incident reports; support director with admin tasks</li></ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Finance & Budget Coordinator</div><div class="role-summary">Manages money, spending, accountability, and transparency.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Safety Officer</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Track every dollar spent; maintain budget dashboard</li><li>Approve/deny spending requests; communicate with sponsors</li><li>Provide monthly financial report</li></ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Event Operations Lead</div><div class="role-summary">Runs monthly hangouts and kickoff events.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Admin Coordinator</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Location booking; setup/teardown; supplies list</li><li>Weather plans; on-site safety</li></ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Hospitality & Environment Lead</div><div class="role-summary">Creates an atmosphere of warmth, welcome, and trust.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Event Operations Lead</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Mentor Coordinator</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Snacks & drinks; greeting families; visible presence at events</li><li>Event flow support; maintain a "safe feeling" environment</li></ul>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <div class="role-left"><div class="role-name">Mentors</div><div class="role-summary">Shepherd students through one-on-one discipleship.</div></div>
+        <div class="role-right">
+          <div class="meta-row"><div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Mentor Coordinator</div></div><div class="meta-item"><div class="meta-label">Accountability</div><div class="meta-val">Assigned Mentor</div></div><div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div></div>
+          <ul class="resp-list"><li>Weekly 2+ hour meetings; lead spiritual discussions; pray for students</li><li>Report updates weekly; attend monthly hangouts</li></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Web Table -->
+  <div class="tier-section">
+    <div class="tier-label">Complete Reference</div>
+    <div class="tier-title">Accountability Web</div>
+    <div class="web-table-wrap">
+      <table class="web-table">
+        <thead>
+          <tr><th>Position</th><th>Reports To</th><th>Accountability Partner</th><th>Mentored By</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Program Director</td><td>Head Advisor</td><td>Media & Liaison</td><td>Head Advisor</td></tr>
+          <tr><td>Head Advisor</td><td>Program Director</td><td>None</td><td>N/A</td></tr>
+          <tr><td>Mentor Coordinator</td><td>Program Director</td><td>Program Director</td><td>Head Advisor</td></tr>
+          <tr><td>Media & Liaison</td><td>Program Director</td><td>Program Director</td><td>Head Advisor</td></tr>
+          <tr><td>Safety Officer</td><td>Head Advisor</td><td>Expansion Officer</td><td>Head Advisor</td></tr>
+          <tr><td>Training Director</td><td>Program Director</td><td>Mentor Coordinator</td><td>Head Advisor</td></tr>
+          <tr><td>Expansion Officer</td><td>Program Director</td><td>Safety Officer</td><td>Head Advisor</td></tr>
+          <tr><td>Admin Coordinator</td><td>Program Director</td><td>Media Coordinator</td><td>Head Advisor</td></tr>
+          <tr><td>Finance Coordinator</td><td>Program Director</td><td>Safety Officer</td><td>Head Advisor</td></tr>
+          <tr><td>Event Lead</td><td>Program Director</td><td>Admin Coordinator</td><td>Head Advisor</td></tr>
+          <tr><td>Hospitality Lead</td><td>Event Lead</td><td>Mentor Coordinator</td><td>Head Advisor</td></tr>
+          <tr><td>Mentors</td><td>Mentor Coordinator</td><td>Assigned Mentor</td><td>Head Advisor</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Leadership Roles & Accountability Guide — Hybrid Movement Structure
+</footer>
+
+</body>
+</html>

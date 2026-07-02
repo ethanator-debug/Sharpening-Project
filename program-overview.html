@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Program Overview & Purpose</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --bronze-light: #e8b84b;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --text-muted: #666;
+  }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); }
+
+  header {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 72px);
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  header .tagline {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    font-style: italic;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 60px 30px; }
+
+  .brand-story {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 4px;
+    padding: 48px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .brand-story::before {
+    content: '"';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    color: var(--bronze);
+    opacity: 0.08;
+    position: absolute;
+    top: -20px; left: 20px;
+    line-height: 1;
+  }
+  .brand-story h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--bronze);
+    margin-bottom: 20px;
+  }
+  .brand-story p { color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 16px; font-size: 15px; }
+  .brand-story .highlight {
+    border-left: 3px solid var(--bronze);
+    padding-left: 20px;
+    margin-top: 24px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  .why-statement {
+    border-left: 5px solid var(--bronze);
+    background: var(--white);
+    padding: 32px 36px;
+    margin-bottom: 48px;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  .why-statement h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--bronze);
+    margin-bottom: 16px;
+  }
+  .why-statement p { line-height: 1.8; color: var(--text); font-size: 15px; margin-bottom: 12px; }
+  .why-statement .mission {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .goal-card {
+    background: var(--white);
+    border-top: 4px solid var(--bronze);
+    padding: 28px 24px;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .goal-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--bronze);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .goal-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+  .goal-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--bronze);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .vision-banner {
+    background: linear-gradient(135deg, var(--black) 0%, #1a1208 100%);
+    color: var(--white);
+    padding: 40px 48px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .vision-banner h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: var(--bronze);
+    margin-bottom: 16px;
+  }
+  .vision-banner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .focus-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .focus-card {
+    background: var(--white);
+    padding: 24px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 3px solid var(--bronze);
+  }
+  .focus-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--bronze);
+    margin-bottom: 8px;
+  }
+  .focus-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+  .focus-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .value-item {
+    background: var(--black);
+    color: var(--white);
+    padding: 20px;
+    border-radius: 4px;
+  }
+  .value-item h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: var(--bronze);
+    margin-bottom: 8px;
+  }
+  .value-item p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+  .closing {
+    background: var(--white);
+    padding: 36px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .closing p { font-size: 15px; line-height: 1.8; color: var(--text); max-width: 640px; margin: 0 auto; }
+
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  footer span { color: var(--bronze); }
+
+  .scripture {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Sharpening Project</div>
+  <h1>Program Overview<br>& Purpose</h1>
+  <p class="tagline">Building Character. Growing Faith. Living Unshaken.</p>
+</header>
+
+<div class="container">
+
+  <p class="scripture">"As iron sharpens iron, so one man sharpens another." — Proverbs 27:17</p>
+
+  <div class="brand-story">
+    <h2>Brand Story</h2>
+    <p>The Sharpening Project began with a simple conviction: young men today are starving for real guidance, biblical truth, and godly men who will walk beside them. What started as one student's calling from God has grown into a disciplined, scalable, mentorship framework designed to strengthen young men nationwide.</p>
+    <p>Through intentional one-on-one mentorship, honest conversations, and Christ-centered community, young men learn to replace confusion with clarity, isolation with brotherhood, and fear with unshakable faith.</p>
+    <div class="highlight">Every system in The Sharpening Project is built around one core purpose: to raise up strong, humble, Christ-following young men who will lead their generation with courage, integrity, and freedom.</div>
+  </div>
+
+  <div class="why-statement">
+    <h2>Why Statement</h2>
+    <p>The Sharpening Project exists to help young men walk in their God-given purpose by building a culture of honesty, discipleship, and Christ-centered brotherhood.</p>
+    <p>We provide a safe place for guys to be real, free from shame, so they can experience lasting freedom from temptation, anxiety, and hidden battles.</p>
+    <div class="mission">Our mission: to guide young men into an intimate, life-transforming relationship with Jesus, teaching them how to hear His voice, follow His ways, and become the men God created them to be.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Three Core Goals</div>
+    <div class="goals-grid">
+      <div class="goal-card">
+        <div class="goal-num">01</div>
+        <h3>Walk in Purpose</h3>
+        <p>Equip young men to discover their identity in Christ and live with clarity, calling, and conviction.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-num">02</div>
+        <h3>Lead with Strength</h3>
+        <p>Train mentors to model faith, humility, courage, servant leadership, and to disciple others the way Jesus did.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-num">03</div>
+        <h3>Find Lasting Freedom</h3>
+        <p>Help young men overcome temptation, break destructive patterns, and build a lifestyle rooted in Scripture, truth, and spiritual maturity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="vision-banner">
+    <h2>Movement-Level Vision</h2>
+    <p>To build a reproducible model of Christian mentorship that can operate in any city, any school, any church — raising up Godly young men and transforming generations worldwide.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Program Focus Areas</div>
+    <div class="focus-areas">
+      <div class="focus-card">
+        <div class="focus-num">01 — Focus</div>
+        <h3>One-on-One Mentorship</h3>
+        <p>Weekly, intentional, relational discipleship between a high-school mentor and a younger student.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-num">02 — Focus</div>
+        <h3>Monthly Community Gathering</h3>
+        <p>Large-group hangouts designed for connection, leadership observation, and spiritual devotion.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-num">03 — Focus</div>
+        <h3>Leadership Development Pipeline</h3>
+        <p>A structured system that raises mentors, leaders, and chapter directors who embody Christlike character.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-num">04 — Focus</div>
+        <h3>Safety & Accountability Systems</h3>
+        <p>Bulletproof rules, reporting procedures, training, and documentation to protect all participants.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-num">05 — Focus</div>
+        <h3>Faith Formation & Biblical Discipleship</h3>
+        <p>Rooting every teaching, conversation, and practice in Scripture, prayer, and the power of the Holy Spirit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Core Values</div>
+    <div class="values-grid">
+      <div class="value-item"><h3>Christ First</h3><p>Jesus is the center of this program. Every decision submits to Him.</p></div>
+      <div class="value-item"><h3>Integrity Always</h3><p>We operate with transparency, character, and accountability in all things.</p></div>
+      <div class="value-item"><h3>Honor the Family</h3><p>Parents are the primary spiritual leaders; mentors support, not replace them.</p></div>
+      <div class="value-item"><h3>Protection of Students</h3><p>Safety protocols and reporting procedures are non-negotiable.</p></div>
+      <div class="value-item"><h3>Brotherhood</h3><p>No young man walks alone — mentors or students.</p></div>
+      <div class="value-item"><h3>Reproducibility</h3><p>Everything we build can be multiplied into future chapters with excellence.</p></div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <p>The Sharpening Project is more than a mentoring program — it is a movement to restore biblical manhood, strengthen families, and raise up a generation of young men who know who they are and what they were created to do. With Scripture as our foundation, excellence as our standard, and Christ as our leader, we believe this model can transform individuals, schools, churches, cities, and one day, the world.</p>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Program Overview & Purpose
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sharpening Project — Leadership Roles & Accountability Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f;
+    --bronze: #c9952a;
+    --cream: #f8f4ef;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --muted: #666;
+    --border: #e0d8cc;
+  }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); }
+
+  header { background: var(--black); padding: 56px 40px 48px; text-align: center; position: relative; }
+  header::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); position: absolute; bottom: 0; left: 0; right: 0; }
+  .eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--bronze); text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5.5vw, 64px); letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  header .sub { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .prayer-block {
+    background: #1a1208;
+    color: rgba(255,255,255,0.7);
+    padding: 40px 48px;
+    text-align: center;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 2;
+    border-bottom: 2px solid rgba(201,149,42,0.2);
+  }
+  .prayer-block .label { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--bronze); margin-bottom: 16px; font-style: normal; }
+  .prayer-block .amen { font-style: normal; font-weight: 700; color: var(--bronze); margin-top: 12px; font-size: 18px; }
+
+  .container { max-width: 920px; margin: 0 auto; padding: 56px 32px; }
+
+  .purpose-bar {
+    background: var(--white);
+    border-left: 5px solid var(--bronze);
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  }
+  .purpose-bar h2 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 12px; }
+  .purpose-bar p { font-size: 14px; line-height: 1.8; color: var(--text); margin-bottom: 8px; }
+
+  .framework-box {
+    background: var(--black);
+    color: var(--white);
+    padding: 36px;
+    margin-bottom: 48px;
+    border-radius: 2px;
+  }
+  .framework-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 24px; }
+  .framework-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 560px) { .framework-row { grid-template-columns: 1fr; } }
+  .fw-item h3 { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--bronze); margin-bottom: 8px; }
+  .fw-item p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+  .quote-bar {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(201,149,42,0.2);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--bronze);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--bronze); opacity: 0.3; }
+
+  .role-cards { display: flex; flex-direction: column; gap: 20px; margin-bottom: 48px; }
+
+  .role-card {
+    background: var(--white);
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    overflow: hidden;
+  }
+  @media (max-width: 620px) { .role-card { grid-template-columns: 1fr; } }
+
+  .role-left {
+    background: var(--black);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .role-num { font-family: 'Bebas Neue', sans-serif; font-size: 60px; color: var(--bronze); opacity: 0.2; line-height: 1; }
+  .role-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--white); line-height: 1.2; margin-bottom: 8px; }
+  .role-summary { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  .role-right { padding: 28px 28px; }
+
+  .role-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .meta-item .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
+  .meta-item .meta-val { font-size: 13px; color: var(--text); line-height: 1.4; }
+
+  .resp-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .resp-list { list-style: none; padding: 0; }
+  .resp-list li { font-size: 13px; line-height: 1.6; padding: 5px 0 5px 18px; position: relative; border-bottom: 1px solid var(--cream); color: var(--text); }
+  .resp-list li:last-child { border-bottom: none; }
+  .resp-list li::before { content: '→'; position: absolute; left: 0; color: var(--bronze); }
+
+  .web-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 48px;
+    background: var(--white);
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  }
+  .web-table th {
+    background: var(--black);
+    color: var(--bronze);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 14px 16px;
+    text-align: left;
+  }
+  .web-table td { font-size: 13px; padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+  .web-table tr:last-child td { border-bottom: none; }
+  .web-table tr:nth-child(even) td { background: var(--cream); }
+
+  .closing { background: var(--black); color: var(--white); padding: 40px; text-align: center; margin-top: 16px; }
+  .closing h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--bronze); margin-bottom: 16px; }
+  .closing p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 560px; margin: 0 auto; }
+
+  footer { background: var(--black); color: rgba(255,255,255,0.3); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  footer span { color: var(--bronze); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Sharpening Project</div>
+  <h1>Leadership Roles &<br>Accountability Guide</h1>
+  <p class="sub">Core Structure — Roles, Responsibilities & Accountability Web</p>
+</header>
+
+<div class="prayer-block">
+  <div class="label">Prayer Over Leadership</div>
+  I pray for wisdom over each leader in this program.<br>
+  I pray that God fills them with peace in hard times and confidence to do the right thing even when it is difficult.<br>
+  Lord, speak clearly to those assigning leadership roles and equip each chosen leader to rise to the occasion.<br>
+  I pray that each of these men walk hand in hand with You, Lord, and that You fill them with Your love till it overflows into the lives of those around them.<br>
+  Thank You, Lord, for each one of these guys.<br>
+  I pray blessings over them Lord and that the leaders and mentors gain as much from this program as the students do.
+  <div class="amen">All of this I pray in Jesus' name, AMEN!!!</div>
+</div>
+
+<div class="container">
+
+  <div class="purpose-bar">
+    <h2>Purpose of This Document</h2>
+    <p>This guide outlines the expectations, requirements, and accountability structure for all leadership roles within The Sharpening Project. Each position exists to build a foundation of strong, Christ-centered leadership and to ensure that the program operates in unity, humility, and excellence.</p>
+    <p>Every leader holds a unique and vital role — but all roles are bound together by a shared calling: to serve faithfully, lead humbly, and guide others toward freedom in Christ.</p>
+  </div>
+
+  <div class="framework-box">
+    <h2>Accountability Framework</h2>
+    <div class="framework-row">
+      <div class="fw-item">
+        <h3>Overview</h3>
+        <p>The Sharpening Project leadership model is a spiritual web of accountability — where every leader is supported, mentored, and covered in prayer. No leader stands alone; every person is both responsible for others and cared for by someone else.</p>
+      </div>
+      <div class="fw-item">
+        <h3>Structure</h3>
+        <p>Every leader has a dedicated accountability partner. The Head Advisor acts as mentor and accountability partner to all leaders. The Program Director oversees overall flow and reports to the Head Advisor.</p>
+      </div>
+    </div>
+    <div class="quote-bar">"We are a family and a team. Each person is here to help each other as much as they possibly can — whether that's prayer, encouragement, or practical help within the program."</div>
+  </div>
+
+  <div class="section-title">Leadership Roles</div>
+
+  <div class="role-cards">
+
+    <div class="role-card">
+      <div class="role-left">
+        <div class="role-num">01</div>
+        <div>
+          <div class="role-name">Program Director</div>
+          <div class="role-summary">Oversees all operations of The Sharpening Project.</div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-meta">
+          <div class="meta-item"><div class="meta-label">Age Requirement</div><div class="meta-val">18+</div></div>
+          <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Head Advisor</div></div>
+          <div class="meta-item"><div class="meta-label">Accountability Partner</div><div class="meta-val">Media & Liaison Coordinator</div></div>
+          <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+        </div>
+        <div class="resp-label">Responsibilities</div>
+        <ul class="resp-list">
+          <li>Oversee all operations, scheduling, and program direction</li>
+          <li>Communicate regularly with the Head Advisor</li>
+          <li>Approve budget items and spending requests</li>
+          <li>Supervise event organization and mentor support</li>
+          <li>Manage accountability between all leaders</li>
+          <li>Debrief regularly with the Head Advisor on logistics and overall health</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-card">
+      <div class="role-left">
+        <div class="role-num">02</div>
+        <div>
+          <div class="role-name">Head Advisor</div>
+          <div class="role-summary">Ministry leader or pastor providing spiritual and administrative oversight.</div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-meta">
+          <div class="meta-item"><div class="meta-label">Requirement</div><div class="meta-val">Active ministry / pastoral leadership</div></div>
+          <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div>
+          <div class="meta-item"><div class="meta-label">Accountability Partner</div><div class="meta-val">None — mentors all</div></div>
+          <div class="meta-item"><div class="meta-label">Check-Ins</div><div class="meta-val">At least every two months</div></div>
+        </div>
+        <div class="resp-label">Responsibilities</div>
+        <ul class="resp-list">
+          <li>Provide spiritual guidance, Biblical wisdom, and prayer covering</li>
+          <li>Review mentor credibility reports and ensure mentor quality</li>
+          <li>Oversee leadership accountability and provide corrective direction</li>
+          <li>Support program direction, vision, and conflict resolution</li>
+          <li>Attend at least one leader meeting or check-in every two months</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-card">
+      <div class="role-left">
+        <div class="role-num">03</div>
+        <div>
+          <div class="role-name">Lead Mentor Coordinator</div>
+          <div class="role-summary">Manages all mentor activity, pairings, and training operations.</div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-meta">
+          <div class="meta-item"><div class="meta-label">Age Requirement</div><div class="meta-val">17+</div></div>
+          <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div>
+          <div class="meta-item"><div class="meta-label">Accountability Partner</div><div class="meta-val">Program Director</div></div>
+          <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+        </div>
+        <div class="resp-label">Responsibilities</div>
+        <ul class="resp-list">
+          <li>Create mentor-student pairings following approved criteria</li>
+          <li>Maintain weekly contact with mentors to ensure meetings occur</li>
+          <li>Manage weekly check-ins and record mentor updates</li>
+          <li>Report logistical and attendance updates to the Program Director</li>
+          <li>Work with the Head Advisor to resolve mentor or group issues</li>
+          <li>Enforce rules and protocols from the program handbook</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-card">
+      <div class="role-left">
+        <div class="role-num">04</div>
+        <div>
+          <div class="role-name">Liaison & Media Coordinator</div>
+          <div class="role-summary">Bridge between leadership, mentors, parents, and the broader community.</div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-meta">
+          <div class="meta-item"><div class="meta-label">Age Requirement</div><div class="meta-val">17+</div></div>
+          <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Program Director</div></div>
+          <div class="meta-item"><div class="meta-label">Accountability Partner</div><div class="meta-val">Program Director</div></div>
+          <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+        </div>
+        <div class="resp-label">Responsibilities</div>
+        <ul class="resp-list">
+          <li>Communicate all event updates, changes, and announcements to parents and mentors</li>
+          <li>Create and manage group messages, RSVP links, and schedules</li>
+          <li>Design and distribute flyers, digital forms, and sign-up sheets</li>
+          <li>Coordinate with mentors to share photo and video content responsibly</li>
+          <li>Work alongside the Head Advisor to ensure privacy and consent standards</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-card">
+      <div class="role-left">
+        <div class="role-num">05</div>
+        <div>
+          <div class="role-name">Mentors</div>
+          <div class="role-summary">Lead small groups of students weekly through intentional discipleship.</div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-meta">
+          <div class="meta-item"><div class="meta-label">Age Requirement</div><div class="meta-val">17+</div></div>
+          <div class="meta-item"><div class="meta-label">Reports To</div><div class="meta-val">Mentor Coordinator</div></div>
+          <div class="meta-item"><div class="meta-label">Accountability Partner</div><div class="meta-val">Assigned Mentor</div></div>
+          <div class="meta-item"><div class="meta-label">Mentored By</div><div class="meta-val">Head Advisor</div></div>
+        </div>
+        <div class="resp-label">Requirements</div>
+        <ul class="resp-list">
+          <li>Must provide a one-to-two paragraph testimony</li>
+          <li>Must receive a High Credibility Status from a leader or youth pastor</li>
+          <li>Must attend kickoff training and weekly meetings</li>
+          <li>Must have an accountability partner who is another mentor or leader</li>
+        </ul>
+        <div class="resp-label" style="margin-top:12px;">Responsibilities</div>
+        <ul class="resp-list">
+          <li>Build intentional relationships with 2–3 students</li>
+          <li>Meet weekly for at least two hours; lead spiritual discussions</li>
+          <li>Encourage students through consistent communication</li>
+          <li>Participate in monthly large group hangouts</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Accountability Web</div>
+
+  <table class="web-table">
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Reports To</th>
+        <th>Accountability Partner</th>
+        <th>Mentored By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Program Director</strong></td><td>Head Advisor</td><td>Media & Liaison Coordinator</td><td>Head Advisor</td></tr>
+      <tr><td><strong>Head Advisor</strong></td><td>Program Director</td><td>None</td><td>N/A</td></tr>
+      <tr><td><strong>Mentor Coordinator</strong></td><td>Program Director</td><td>Program Director</td><td>Head Advisor</td></tr>
+      <tr><td><strong>Media & Liaison Coordinator</strong></td><td>Program Director</td><td>Program Director</td><td>Head Advisor</td></tr>
+      <tr><td><strong>Mentors</strong></td><td>Mentor Coordinator</td><td>Assigned Mentor</td><td>Head Advisor</td></tr>
+    </tbody>
+  </table>
+
+  <div class="closing">
+    <h2>Closing Note</h2>
+    <p>This guide exists to keep The Sharpening Project running with structure, grace, and accountability. Every leader is encouraged to remember that this program is not about performance. It's about people — raising up young men to walk in truth, freedom, and leadership through Jesus Christ.</p>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Sharpening Project</span> &nbsp;|&nbsp; Leadership Roles & Accountability Guide
+</footer>
+
+</body>
+</html>
