@@ -10,9 +10,10 @@ const ADMIN_USER = process.env.ADMIN_USER     || 'admin';
 const ADMIN_PASS = process.env.ADMIN_PASSWORD || 'sharpening2024';
 
 // ── Postgres pool ──────────────────────────────────────────────────────────────
-// Vercel Postgres sets POSTGRES_URL; local .env uses DATABASE_URL
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL,
+  connectionString: process.env.POSTGRES_URL || process.env.DATABASE_URL || process.env.STORAGE_URL,
+  ssl: { rejectUnauthorized: false },
+  max: 1,
 });
 
 // Create table on first cold start (idempotent — safe to run every boot)
@@ -68,6 +69,11 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(__dirname));
+
+// Explicit root route — serves index.html for /
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // ── Form submission ────────────────────────────────────────────────────────────
 app.post('/api/submit', async (req, res) => {
